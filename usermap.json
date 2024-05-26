@@ -1,0 +1,6 @@
+{
+  "USER": {
+    "wallet": ["balance", "top up"],
+    "cart": ["addItem", "removeItem"]
+  }
+}

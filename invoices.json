@@ -1,0 +1,27 @@
+{
+  "1" : {
+    "customerId" : 1,
+    "status" : "unpaid",
+    "total" : 400.0
+  },
+  "2" : {
+    "customerId" : 1,
+    "status" : "unpaid",
+    "total" : 400.0
+  },
+  "3" : {
+    "customerId" : 1,
+    "status" : "unpaid",
+    "total" : 400.0
+  },
+  "4" : {
+    "customerId" : 1,
+    "status" : "paid",
+    "total" : 400.0
+  },
+  "5" : {
+    "customerId" : 1,
+    "status" : "paid",
+    "total" : 400.0
+  }
+}
