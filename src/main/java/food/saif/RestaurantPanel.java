@@ -78,7 +78,7 @@ public class RestaurantPanel {
             String itemDescription = input.nextLine();
             System.out.println("Enter item's price: ");
             double itemPrice = input.nextDouble();
-            int itemId = Item.addItem(restaurant.getRestaurantId(), itemName, itemDescription, itemPrice);
+            int itemId = Item.addItem(restaurant.getId(), itemName, itemDescription, itemPrice);
             restaurant.addItem(itemId);
             System.out.println("Item #"+itemId+" was added.");
             editMenuPage();
@@ -92,7 +92,7 @@ public class RestaurantPanel {
                     System.out.println("Item is not found.");
                     continue;
                 }
-                if (item.get("restaurantId").asInt()==restaurant.getRestaurantId()) {
+                if (item.get("restaurantId").asInt()==restaurant.getId()) {
                     Item.removeItem(itemId);
                     restaurant.removeItem(itemId);
                     System.out.println("Item #"+itemId+" was removed.");

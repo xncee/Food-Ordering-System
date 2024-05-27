@@ -1,10 +1,12 @@
 package food.saif;
 
+import food.saif.design.Color;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class UserPanel {
+public class UserPanel implements Color {
     static Scanner input = new Scanner(System.in);
     static Login user;
     static Customer customer;
@@ -14,50 +16,43 @@ public class UserPanel {
     public static void main(String[] args) {
         System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         //System.out.println("Welcome to ");
-        navPage();
+        homePage();
 
     }
     public static void loginPage() {
         user = new Login();
         System.out.println("\n# Login page");
-        System.out.println("1) Sign in");
-        System.out.println("2) Sign up");
-        System.out.print("=> ");
+        System.out.println("1. Sign in");
+        System.out.println("2. Sign up");
         int choice = getUserInput(new int[] {1, 2});
 
-        boolean newCustomer = choice==2;
-        boolean isUsernameVaild = false, isPasswordValid = false;
-        String username = "", password = "", email = "";
+        boolean newUser = choice==2;
+        boolean isUsernameValid = false, isPasswordValid = false;
+        String username = "", password = "";
         while (!user.isLoggedIn) {
-            if (!isUsernameVaild) {
+            if (!isUsernameValid) {
                 System.out.println("Enter username: ");
                 username = input.nextLine();
             }
-            if (choice==1) isUsernameVaild = true;
+            isUsernameValid = choice==1; //if (choice==1) isUsernameValid = choice==1;
 
             if (!isPasswordValid) {
                 System.out.println("Enter password: ");
                 password = input.nextLine();
             }
 
-            if (!user.validatePassword(password)) {
-                continue;
-            }
-            isPasswordValid = true;
+            isPasswordValid = user.validatePassword(password);
+            if (!isPasswordValid) continue;
 
-
-            if (newCustomer) {
-                if (user.isUsernameTaken(username)) {
-                    System.out.println("this username is taken!");
+            if (newUser) {
+                isUsernameValid = user.isUsernameTaken(username);
+                if (!isUsernameValid) {
+                    System.out.println(RED+"This username is taken!"+RESET);
                     continue;
                 }
-                isUsernameVaild = true;
 
                 System.out.println("Enter email: ");
-                email = input.nextLine();
-                if (!user.validateEmail(email)) {
-                    continue;
-                }
+                String email = input.nextLine();
 
                 System.out.println("Enter your name: ");
                 String customerName = input.nextLine();
@@ -68,30 +63,21 @@ public class UserPanel {
                 user.signUp(username, password, email, phoneNumber, customerName);
             }
 
-            else if (choice==1) {
-                if (!user.signIn(username, password)) {
-                    isUsernameVaild = false;
-                    isPasswordValid = false;
-                }
-
-            }
+            else if (choice==1)
+                isUsernameValid = isPasswordValid = user.signIn(username, password);
         }
-        //Screen.clear();
-        printHr();
-        System.out.println("\nYou have been successfully logged in.");
+
+        System.out.println(GREEN+"\nYou have been successfully logged in."+RESET);
 
     }
-    public static void printHr() {
-        System.out.println("============================");
-    }
-    public static void navPage() {
-        if (user==null || !user.isLoggedIn) {
-            loginPage();
-        }
+
+    public static void homePage() {
+        if (user==null || !user.isLoggedIn) loginPage();
+
         int customerId = user.getCustomerId();
         customer = new Customer(customerId);
 
-        System.out.println("\n# Navigation Page");
+        System.out.println("\n# Home Page");
         System.out.println("1) Your Account");
         System.out.println("2) Order");
         System.out.println("3) Cart");
@@ -103,7 +89,6 @@ public class UserPanel {
         }
         else if (choice==2) {
             orderPage();
-            printHr();
             Restaurant.displayRestaurants();
             // restasurant Page
         }
@@ -112,7 +97,7 @@ public class UserPanel {
         }
         else if (choice==99) {
             loginPage();
-            navPage();
+            homePage();
 
         }
     }
@@ -125,7 +110,6 @@ public class UserPanel {
         System.out.print("=> ");
         int choice = getUserInput(new int[] {1, 2, 3, 99});
         if (choice==1) {
-            printHr();
             System.out.println(customer);
             System.out.println("Username: "+user.getUsername());
             System.out.println("Email: "+user.getEmail());
@@ -148,7 +132,7 @@ public class UserPanel {
                         user.changePassword(newPassword);
                         System.out.println("Your password has been changed successfully.");
                         System.out.println("You have been logged out. Please log in again.");
-                        navPage();
+                        homePage();
                         break;
                     }
                 }
@@ -161,7 +145,7 @@ public class UserPanel {
             walletPage();
         }
         else if (choice==99) {
-            navPage();
+            homePage();
         }
     }
     public static void orderPage() {
@@ -177,7 +161,7 @@ public class UserPanel {
 
         }
         else if (choice==99) {
-            navPage();
+            homePage();
         }
     }
     public static void walletPage() {

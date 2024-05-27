@@ -1,7 +1,6 @@
-
 package food.roba;
 
-public interface Organic {
+public interface isOrganic {
     String organicCertificateAgent();
-    // add more methods
+        
 }

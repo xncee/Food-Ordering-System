@@ -40,22 +40,6 @@ public class Login {
     }
     // String s = "saif.noor.roba";
     // sout(s.split("."))[2] -> {"saif", "noor", "roba"}
-    public boolean validateEmail(String email) {
-        try {
-            if (email.contains("@") && !email.split("@")[0].isEmpty() && email.split("@")[1].contains(".")) {
-                // && !email.split("@")[1].split(".")[0].isEmpty() && !email.split("@")[1].split(".")[1].isEmpty()
-                if (isEmailTaken(email)) {
-                    System.out.println("This email is used in another account.");
-                    return false;
-                }
-                return true;
-            }
-        }
-        catch (Exception e) {}
-
-        System.out.println("Your email must be in the correct format (example@domain.com)");
-        return false;
-    }
     private void loggedIn(String username, String password, String email, String phoneNumber) {
         this.username = username;
         this.password = password;

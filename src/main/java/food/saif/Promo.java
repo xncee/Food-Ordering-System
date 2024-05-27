@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.time.LocalDate;
 
 public class Promo {
-    final static JsonFileWriter JSWriter = new JsonFileWriter("promoCodes.json");
+    final static JsonFileWriter JSWriter = new JsonFileWriter("promos.json");
     static ObjectNode promoCodes = JSWriter.getJsonNode();
     final static char[] CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
     public static boolean validatePromoCode(String code) {
