@@ -1,64 +1,22 @@
 {
-  "202441" : {
-    "items" : [ 1, 2 ],
-    "appliedPromoCodes" : [ "s50" ],
-    "customerId" : 1,
-    "status" : "open",
+  "ORDER1" : {
+    "items" : [ "ITEM1", "ITEM2" ],
+    "promos" : [ "s50" ],
+    "customer" : "CUSTOMER1",
     "total" : 400.0,
-    "invoiceId" : 1,
-    "deliveryAddress" : "Amman, Jordan",
-    "orderDate" : "2024-04-29T03:02:32.599889400"
+    "invoice" : "INVOICE1",
+    "address" : "Amman, Jordan",
+    "datetime" : "2024-04-29T03:02:32.599889400",
+    "status" : "open"
   },
-  "202442" : {
-    "items" : [ 1, 2 ],
-    "appliedPromoCodes" : [ "s50" ],
-    "customerId" : 1,
-    "status" : "open",
+  "ORDER2" : {
+    "items" : [ "ITEM1", "ITEM1", "ITEM3" ],
+    "promos" : [  ],
+    "customer" : "CUSTOMER1",
     "total" : 400.0,
-    "invoiceId" : 2,
-    "deliveryAddress" : "Amman, Jordan",
-    "orderDate" : "2024-04-29T03:05:02.869131900"
-  },
-  "202443" : {
-    "items" : [ 1, 2 ],
-    "appliedPromoCodes" : [ "s50" ],
-    "customerId" : 1,
-    "status" : "open",
-    "total" : 400.0,
-    "invoiceId" : 3,
-    "deliveryAddress" : "Amman, Jordan",
-    "orderDate" : "2024-04-29T03:06:45.866978500"
-  },
-  "202444" : {
-    "items" : [ 1, 2 ],
-    "appliedPromoCodes" : [ "s50" ],
-    "customerId" : 1,
-    "status" : "confirmed",
-    "total" : 400.0,
-    "invoiceId" : 4,
-    "deliveryAddress" : "Amman, Jordan",
-    "orderDate" : "2024-04-29T03:07:50.546659300"
-  },
-  "202445" : {
-    "items" : [ 1, 2 ],
-    "appliedPromoCodes" : [ "s50" ],
-    "customerId" : 1,
-    "status" : "confirmed",
-    "total" : 400.0,
-    "invoiceId" : 5,
-    "deliveryAddress" : "Amman, Jordan",
-    "orderDate" : "2024-04-29T17:11:24.924805500"
-  },
-  "202456" : {
-    "items" : [ 1, 2 ],
-    "appliedPromoCodes" : [ "s50" ],
-    "customerId" : 1,
-    "status" : "confirmed",
-    "total" : 400.0,
-    "invoiceId" : 0,
-    "paymentMethod" : null,
-    "deliveryAddress" : "Amman, Jordan",
-    "phoneNumber" : null,
-    "orderDate" : "2024-05-14T22:20:45.787224500"
+    "invoice" : "INVOICE1",
+    "address" : "Amman, Jordan",
+    "datetime" : "2024-04-29T03:02:32.599889400",
+    "status" : "open"
   }
 }

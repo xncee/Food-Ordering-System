@@ -1,0 +1,27 @@
+{
+  "ITEM1": {
+    "name": "",
+    "price": 99,
+    "description": "",
+    "category": "",
+    "isHealthy": false,
+    "isVegan": false,
+    "isGlutenFree": false,
+    "isOrganic": true,
+    "ingredients": "",
+    "calories": 99
+  },
+  "ITEM2": {
+    "id": "ITEM2",
+    "name": "",
+    "price": 99,
+    "description": "",
+    "category": "",
+    "isHealthy": false,
+    "isVegan": false,
+    "isGlutenFree": false,
+    "isOrganic": true,
+    "ingredients": "",
+    "calories": 99
+    }
+}

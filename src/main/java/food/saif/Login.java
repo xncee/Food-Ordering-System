@@ -123,7 +123,7 @@ public class Login {
         }
         return false;
     }
-    public int getCustomerId() {
+    public String getCustomerId() {
         if (isLoggedIn)
             return users.get(username).get("customerId").asInt();
         return -1;

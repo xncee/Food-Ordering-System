@@ -12,6 +12,7 @@ public class Main {
                 150,
                 false,
                 true,
+                true,
                 "fish sweet potatoes and broccoli"
                 );
         m1[1] = new JunkFood(

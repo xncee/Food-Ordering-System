@@ -6,9 +6,18 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.time.LocalDate;
 
 public class Promo {
-    final static JsonFileWriter JSWriter = new JsonFileWriter("promos.json");
-    static ObjectNode promoCodes = JSWriter.getJsonNode();
+    private String code;
+    private double percentage; //0.xx
+    private LocalDate expirationDate;
+
     final static char[] CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
+
+    public Promo(String code, double percentage, LocalDate expirationDate) {
+        this.code = code;
+        this.percentage = percentage;
+        this.expirationDate = expirationDate;
+    }
+
     public static boolean validatePromoCode(String code) {
         // ort
         code = code.toLowerCase();
@@ -61,7 +70,12 @@ public class Promo {
         }
         return false;
     }
-    private static void updatePromoCodes() {
-        JSWriter.write(promoCodes);
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

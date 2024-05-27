@@ -17,23 +17,24 @@ public class HealthyFood extends Food implements isOrganic {
     private int calories;
     private boolean isVegan;
     private boolean isGlutenFree;
-    private String isOrganic;
+    private boolean isOrganic;
 
     //public HealthyFood() {}
 
-    public HealthyFood(String id, String name, double price, String description, String category, int calories, boolean isVegan, boolean isGlutenFree, String ingredients) {
+    public HealthyFood(String id, String name, double price, String description, String category, int calories, boolean isVegan, boolean isGlutenFree, boolean isOrganic, String ingredients) {
         super(id, name, price, description, category, true);
         this.calories = calories;
         this.isVegan = isVegan;
         this.isGlutenFree = isGlutenFree;
+        this.isOrganic = isOrganic;
         this.ingredients = ingredients;
     }
 
-    public String getIsOrganic() {
+    public boolean isOrganic() {
         return isOrganic;
     }
 
-    public void setIsOrganic(String isOrganic) {
+    public void setIsOrganic(boolean isOrganic) {
         this.isOrganic = isOrganic;
     }
 

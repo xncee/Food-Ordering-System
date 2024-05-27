@@ -74,7 +74,7 @@ public class UserPanel implements Color {
     public static void homePage() {
         if (user==null || !user.isLoggedIn) loginPage();
 
-        int customerId = user.getCustomerId();
+        String customerId = user.getCustomerId();
         customer = new Customer(customerId);
 
         System.out.println("\n# Home Page");

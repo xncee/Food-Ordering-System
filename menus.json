@@ -1,0 +1,13 @@
+{
+  "MENU1": {
+    "restaurant": "",
+    "items": [
+      "ITEM1",
+      "ITEM2"
+    ]
+  },
+  "MENU2": {
+    "restaurant": "",
+    "items": []
+  }
+}

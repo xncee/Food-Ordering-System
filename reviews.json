@@ -1,0 +1,14 @@
+{
+  "REV1": [
+    {
+      "customer": "C1",
+      "rating": 5,
+      "comment": "very good"
+    },
+    {
+      "customer": "C2",
+      "rating": 4,
+      "comment": "good"
+    }
+  ]
+}

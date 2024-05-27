@@ -1,27 +1,12 @@
 {
-  "1" : {
-    "customerId" : 1,
-    "status" : "unpaid",
-    "total" : 400.0
+  "INVOICE1": {
+    "order": "ORDER1",
+    "amount": 99.0,
+    "date": "2024-05-10"
   },
-  "2" : {
-    "customerId" : 1,
-    "status" : "unpaid",
-    "total" : 400.0
-  },
-  "3" : {
-    "customerId" : 1,
-    "status" : "unpaid",
-    "total" : 400.0
-  },
-  "4" : {
-    "customerId" : 1,
-    "status" : "paid",
-    "total" : 400.0
-  },
-  "5" : {
-    "customerId" : 1,
-    "status" : "paid",
-    "total" : 400.0
+  "INVOICE2": {
+    "order": "ORDER2",
+    "amount": 54.0,
+    "date": "2024-05-15"
   }
 }

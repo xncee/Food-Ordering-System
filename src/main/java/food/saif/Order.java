@@ -1,92 +1,42 @@
 package food.saif;
 
-import food.saif.io.JsonFileWriter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import food.roba.Item;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order extends Promo {
-    final static JsonFileWriter JSWriter = new JsonFileWriter("orders.json");
-    static ObjectNode orders = JSWriter.getJsonNode();
-    private Long orderId;
-    private int customerId;
-    private List<Integer> items;
-    private double total;
-    private boolean paid;
-    private int invoiceId;
-    private List<String> appliedPromoCodes = new ArrayList<>();
-    private double totalDiscount;
-    private String paymentMethod;
-    private String deliveryAddress;
+public class Order {
+    private String id;
+    List<Item> items;
+    private List<Promo> promos;
+    private Customer customer;
     private String status;
-    private String phoneNumber;
-    private String orderDate;
-    /*
-                .put("status", status)
-                .put("total", total)
-                .put("invoiceId", invoiceId)
-                .put("paymentMethod", paymentMethod)
-                .put("deliveryAddress", deliveryAddress)
-                .put("phoneNumber", phoneNumber)
-                .put("orderDate", orderDate);
-     */
+    private double total;
+    private Invoice invoice;
+    private String deliveryAddress;
+    private LocalDateTime datetime;
     // ★ ★ ★ ★ ★
     // ★ ★ ★ ★ ★
-    public Order(int orderId) {
-        if (orders.get(String.valueOf(orderId))==null) {
-            System.out.println("Invalid orderId.");
-            return;
-        }
-        JsonNode order = orders.get(String.valueOf(orderId));
-        this.customerId = order.get("customerId").asInt();
-        ArrayNode a = new ObjectMapper().valueToTree(order.get("items"));
-        //this.items = a.;
-        System.out.println(new ObjectMapper().valueToTree(order.get("items")));
 
-        this.deliveryAddress = order.get("deliveryAddress").asText();
-    }
-//    public Order(int customerId, List<Integer> items, String deliveryAddress) {
-//        setOrderId();
-//        this.customerId = customerId;
-//        this.items = items;
-//        this.deliveryAddress = deliveryAddress;
-//
-//        calculateTotal();
-//        this.status = "open";
-//        this.orderDate =  LocalDateTime.now().toString();
-//    }
 
-    private void setOrderId() {
-        LocalDate date = LocalDateTime.now().toLocalDate();
-        int YYYY = date.getYear();
-        int MM = date.getMonthValue();
-        this.orderId = Long.parseLong(""+YYYY+MM+(orders.size()+1));
-    }
-
-    public long getCustomerId() {
-        return customerId;
-    }
-
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
-    public void setDeliveryAddress(String deliveryAddress) {
+    public Order(String id, List<Item> items, List<Promo> promos, Customer customer, double total, Invoice invoice, String deliveryAddress, LocalDateTime datetime, String status) {
+        this.id = id;
+        this.items = items;
+        this.promos = promos;
+        this.customer = customer;
+        this.total = total;
+        this.invoice = invoice;
         this.deliveryAddress = deliveryAddress;
+        this.datetime = datetime;
+        this.status = status;
     }
 
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-        saveOrder();
-    }
     public void confirmOrder() {
         System.out.println("Order confirmed.");
         setStatus("confirmed");
@@ -133,37 +83,76 @@ public class Order extends Promo {
         this.total = total;
     }
 
-    private void saveOrder() {
-        ObjectNode order = JSWriter.getNewJsonNode();
-
-        ArrayNode itemsArray = new ObjectMapper().valueToTree(items);
-        ArrayNode appliedPromoCodesArray = new ObjectMapper().valueToTree(appliedPromoCodes);
-        order.putArray("items").addAll(itemsArray);
-        order.putArray("appliedPromoCodes").addAll(appliedPromoCodesArray);
-
-        order.put("customerId", customerId)
-                .put("status", status)
-                .put("total", total)
-                .put("invoiceId", invoiceId)
-                .put("paymentMethod", paymentMethod)
-                .put("deliveryAddress", deliveryAddress)
-                .put("phoneNumber", phoneNumber)
-                .put("orderDate", orderDate);
-
-        orders.set(String.valueOf(orderId), order);
-        JSWriter.write(orders);
+    public String getId() {
+        return id;
     }
-    public static List<Integer> getOrders(int customerId) {
-        List<Integer> ordersList = new ArrayList<>();
-        for (JsonNode order: orders) {
-            if (order.get("customerId").asInt()==customerId) {
-                ordersList.add(order.asInt());
-            }
-        }
-        return ordersList;
+
+    public void setId(String id) {
+        this.id = id;
     }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public List<Promo> getPromos() {
+        return promos;
+    }
+
+    public void setPromos(List<Promo> promos) {
+        this.promos = promos;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public LocalDateTime getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(LocalDateTime datetime) {
+        this.datetime = datetime;
+    }
+
     @Override
     public String toString() {
-        return orders.get(String.valueOf(orderId)).toPrettyString();
+        return orders.get(String.valueOf(id)).toPrettyString();
     }
 }
