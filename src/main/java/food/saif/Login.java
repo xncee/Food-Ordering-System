@@ -65,6 +65,7 @@ public class Login implements ApplicationData, Color {
     }
 
     private boolean isEmailValid(String email) {
+        //
         email = email.toLowerCase();
         if (!email.contains("@")) return false;
         if (!email.contains(".")) return false;

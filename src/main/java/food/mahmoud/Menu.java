@@ -2,15 +2,19 @@ package food.mahmoud;
 
 import food.roba.Item;
 import food.saif.Identifiable;
-import food.saif.Restaurant;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+// .add(x)
+// .remove(x)
+// .size(x)
+// .get(x)
 public class Menu implements Identifiable {
     private String id;
     private String restaurantId;
-    List<Item> items;
+    List<Item> items; //== Item[] items;
 
     public Menu(String id, String restaurantId, List<Item> items) {
         this.id = id;
@@ -18,8 +22,18 @@ public class Menu implements Identifiable {
         this.items = items;
     }
 
-    public void add(Item item) {}
-    public void remove(Item item) {}
+    public void add(Item item) {
+        items.add(item);
+    }
+    public void remove(Item item) {
+        items.remove(item);
+    }
+
+    public void displayMenu() {
+        for (int i=0; i<items.size(); i++) {
+            System.out.println(items.get(i));
+        }
+    }
 
     public List<Item> getItems() {
         return items;

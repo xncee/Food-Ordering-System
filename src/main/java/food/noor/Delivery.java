@@ -24,8 +24,6 @@ public class Delivery implements DeliveryServices, Identifiable {
     private double distance;
     private String deliveryTime;
 
-    //public Delivery() {}
-
     public Delivery(String id, String location, Order order, Driver driver, String status, double distance, String deliveryTime) {
         this.id = id;
         this.location = location;

@@ -7,7 +7,7 @@
     "invoice" : "INVOICE1",
     "address" : "Amman, Jordan",
     "datetime" : "2024-04-29T03:02:32.599889400",
-    "status" : "open"
+    "status" : "confirmed"
   },
   "ORDER2" : {
     "items" : [ "ITEM1", "ITEM1", "ITEM3" ],

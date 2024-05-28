@@ -3,9 +3,9 @@ package food.saif;
 import java.time.LocalDateTime;
 
 public class Customer extends User {
-    public String email;
-    public double balance;
-    public LocalDateTime datetime;
+    private String email;
+    private double balance;
+    private LocalDateTime datetime;
 
     public Customer(String id, String name, String email, String phoneNumber, double balance, LocalDateTime datetime) {
         super(id, name, phoneNumber);
