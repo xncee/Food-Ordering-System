@@ -34,7 +34,7 @@ public class JsonFileWriter {
     public ObjectNode getJsonNode() {
         return jsonNode;
     }
-    public ObjectNode getNewJsonNode() {
+    public static ObjectNode getNewJsonNode() {
         return new ObjectMapper().createObjectNode();
     }
     public void write(JsonNode jsonNode) {

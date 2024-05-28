@@ -3,22 +3,22 @@ package food.saif;
 import food.saif.io.JsonFileWriter;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class Payment implements Identifiable {//extends Customer {
+public class Payment implements ApplicationData, Identifiable {//extends Customer {
     final static JsonFileWriter JSWriter = new JsonFileWriter("invoices.json");
     static ObjectNode invoices = JSWriter.getJsonNode();
     public String id;
     private int customerId;
     public double total;
 
-    private Payment(double total, int customerId, String id) {
-        this.total = total;
-        this.id = id;
-        this.customerId =  customerId;
-        updateInvoice("unpaid");
-    }
-    public Payment(double total, int customerId, String paymentMethod) {
-        this(total, customerId, invoices.size()+1);
-    }
+//    private Payment(double total, int customerId, String id) {
+//        this.total = total;
+//        this.id = id;
+//        this.customerId =  customerId;
+//        updateInvoice("unpaid");
+//    }
+//    public Payment(double total, int customerId, String paymentMethod) {
+//        this(total, customerId, invoicesList.size()+1);
+//    }
     @Override
     public String getId() {
         return id;

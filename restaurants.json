@@ -1,10 +1,18 @@
 {
-  "REST1": {
-    "name": "shawarma king",
-    "phoneNumber": "",
-    "location": "",
-    "description": "restaurant that makes the best shawarma",
-    "menu": "MENU1",
-    "reviews": "REV1"
+  "REST1" : {
+    "name" : "shawarma king",
+    "phoneNumber" : "",
+    "location" : "",
+    "description" : "restaurant that makes the best shawarma",
+    "menu" : "MENU1",
+    "reviews" : "REV1"
+  },
+  "REST2" : {
+    "name" : "Burger",
+    "phoneNumber" : "71283",
+    "location" : "df",
+    "description" : "dfsf",
+    "menu" : "MENU3",
+    "reviews" : ""
   }
 }

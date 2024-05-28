@@ -1,30 +1,26 @@
 {
   "xnce" : {
-    "customerId" : 3,
+    "id" : "USER1",
     "password" : "13243242",
     "email" : "xnce@gmail.com",
-    "phoneNumber" : "+962796027099",
-    "registrationDate" : "2024-05-17T16:18:59.248264200"
+    "phoneNumber" : "+962796027099"
   },
   "roba" : {
-    "customerId" : 4,
+    "id" : "USER2",
     "password" : "12345678#",
     "email" : "roba@gmail.com",
-    "phoneNumber" : "+96279457867",
-    "registrationDate" : "2024-05-17T16:55:11.542201200"
+    "phoneNumber" : "+96279457867"
   },
   "moha" : {
-    "customerId" : 5,
+    "id" : "USER3",
     "password" : "56565672",
     "email" : "yuyu@gmail.com",
-    "phoneNumber" : "+962796757588",
-    "registrationDate" : "2024-05-20T16:14:41.193701300"
+    "phoneNumber" : "+962796757588"
   },
   "ahmad" : {
-    "customerId" : 6,
+    "id" : "USER4",
     "password" : "76867676",
     "email" : "gyu@gmail.com",
-    "phoneNumber" : "67868",
-    "registrationDate" : "2024-05-20T22:39:58.018268"
+    "phoneNumber" : "67868"
   }
 }

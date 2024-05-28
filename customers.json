@@ -1,7 +1,9 @@
 {
   "CUST1" : {
     "customerName" : "saif alkhalili",
+    "email": "",
     "phoneNumber" : "",
-    "balance" : 0
+    "balance" : 0,
+    "date": ""
   }
 }

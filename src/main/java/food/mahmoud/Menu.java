@@ -9,12 +9,12 @@ import java.util.List;
 
 public class Menu implements Identifiable {
     private String id;
-    private Restaurant restaurant;
-    List<Item> items = new ArrayList<>();
+    private String restaurantId;
+    List<Item> items;
 
-    public Menu(String id, Restaurant restaurant, List<Item> items) {
+    public Menu(String id, String restaurantId, List<Item> items) {
         this.id = id;
-        this.restaurant = restaurant;
+        this.restaurantId = restaurantId;
         this.items = items;
     }
 
@@ -37,11 +37,20 @@ public class Menu implements Identifiable {
         this.id = id;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
+    public String getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id  +
+                ", restaurantId=" + restaurantId +
+                ", items=" + items +
+                "}";
     }
 }

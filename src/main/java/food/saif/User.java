@@ -1,6 +1,6 @@
 package food.saif;
 
-public class User implements ApplicationData, Identifiable {
+public abstract class User implements ApplicationData, Identifiable {
     private String id;
     private String name;
     private String phoneNumber;
@@ -42,6 +42,6 @@ public class User implements ApplicationData, Identifiable {
                 "id=" + id  +
                 ", name=" + name +
                 ", phoneNumber=" + phoneNumber +
-                '}';
+                "}";
     }
 }

@@ -48,4 +48,14 @@ public class Review implements Identifiable {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id='" + id +
+                ", customer=" + customer +
+                ", rating=" + rating +
+                ", comment=" + comment +
+                '}';
+    }
 }

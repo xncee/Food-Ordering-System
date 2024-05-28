@@ -62,8 +62,8 @@ public class Restaurant extends User {
         return super.toString()+"\nRestaurant{" +
                 "location=" + location +
                 ", description=" + description +
-                ", menu=" + menu +
-                ", reviews=" + reviews +
+                ", menu=" + menu.getId() +
+                ", reviews=" + (reviews.isEmpty()?null:reviews.get(0).getId()) +
                 "}";
     }
 }

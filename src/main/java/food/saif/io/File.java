@@ -1,6 +1,5 @@
 package food.saif.io;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class File {
@@ -14,7 +13,6 @@ public class File {
 
         data = reader.getJsonNode();
     }
-
     public ObjectNode read() {
         return data;
     }

@@ -12,12 +12,11 @@
     "calories": 99
   },
   "ITEM2": {
-    "id": "ITEM2",
     "name": "",
     "price": 99,
     "description": "",
     "category": "",
-    "isHealthy": false,
+    "isHealthy": true,
     "isVegan": false,
     "isGlutenFree": false,
     "isOrganic": true,

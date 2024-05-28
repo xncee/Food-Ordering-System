@@ -1,20 +1,25 @@
 package food.saif;
 
+import java.time.LocalDateTime;
+
 public class Customer extends User {
+    public String email;
     public double balance;
-    public Customer(String id, String name, String phoneNumber, double balance) {
+    public LocalDateTime datetime;
+
+    public Customer(String id, String name, String email, String phoneNumber, double balance, LocalDateTime datetime) {
         super(id, name, phoneNumber);
+        this.email = email;
         this.balance = balance;
+        this.datetime = datetime;
     }
 
-    public static String getNewId() {
-        String str;
-        if (!customersList.isEmpty()) {
-            str = customersList.get(customersList.size() - 1).getId().split("CUST")[1];
-        }
-        else
-            str = "0";
-        return "CUST"+(Integer.parseInt(str)+1);
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public double getBalance() {
@@ -23,6 +28,14 @@ public class Customer extends User {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public LocalDateTime getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(LocalDateTime datetime) {
+        this.datetime = datetime;
     }
 
     @Override

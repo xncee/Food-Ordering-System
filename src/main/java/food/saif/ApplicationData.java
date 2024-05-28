@@ -1,12 +1,17 @@
 package food.saif;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import food.mahmoud.Menu;
 import food.saif.io.File;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface ApplicationData {
+    File usersFile = new File("users.json");
+    ObjectNode usersJson = usersFile.read();
+    //List<Identifiable> usersList = new ArrayList<>(); not needed
     File customersFile = new File("customers.json");
     ObjectNode customersJson = customersFile.read();
     List<Identifiable> customersList = new ArrayList<>(); // ((Customer) customersList.get(0)).
@@ -31,6 +36,5 @@ public interface ApplicationData {
     File ordersFile = new File("orders.json");
     ObjectNode ordersJson = ordersFile.read();
     List<Identifiable> ordersList = new ArrayList<>();
-
 
 }
