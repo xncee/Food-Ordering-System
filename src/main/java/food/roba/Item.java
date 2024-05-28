@@ -1,6 +1,8 @@
 package food.roba;
 
-public class Item {
+import food.saif.Identifiable;
+
+public class Item implements Identifiable {
     protected String id;
     protected String name;
     protected double price;
@@ -13,6 +15,7 @@ public class Item {
         this.description = description;
     }
 
+    @Override
     public String getId() {
         return id;
     }

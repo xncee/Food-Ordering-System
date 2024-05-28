@@ -1,15 +1,20 @@
 package food.saif;
 
-public class Customer {
-    private String id;
-    private String name;
-    private String phoneNumber;
+public class Customer extends User {
     public double balance;
     public Customer(String id, String name, String phoneNumber, double balance) {
-        this.id = id;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
+        super(id, name, phoneNumber);
         this.balance = balance;
+    }
+
+    public static String getNewId() {
+        String str;
+        if (!customersList.isEmpty()) {
+            str = customersList.get(customersList.size() - 1).getId().split("CUST")[1];
+        }
+        else
+            str = "0";
+        return "CUST"+(Integer.parseInt(str)+1);
     }
 
     public double getBalance() {
@@ -20,35 +25,10 @@ public class Customer {
         this.balance = balance;
     }
 
-    public static int getNewCustomerId() {
-        return customers.size()+1;
-    }
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name=" + name +
-                ", balance=$" + balance +
+        return super.toString()+"\nCustomer{" +
+                "balance=$" + balance +
                 "}";
     }
 }

@@ -3,35 +3,35 @@ package food.saif;
 import food.saif.io.JsonFileWriter;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class Payment {//extends Customer {
+public class Payment implements Identifiable {//extends Customer {
     final static JsonFileWriter JSWriter = new JsonFileWriter("invoices.json");
     static ObjectNode invoices = JSWriter.getJsonNode();
-    public int invoiceId;
+    public String id;
     private int customerId;
     public double total;
 
-    private Payment(double total, int customerId, int invoiceId) {
+    private Payment(double total, int customerId, String id) {
         this.total = total;
-        this.invoiceId = invoiceId;
+        this.id = id;
         this.customerId =  customerId;
         updateInvoice("unpaid");
     }
     public Payment(double total, int customerId, String paymentMethod) {
         this(total, customerId, invoices.size()+1);
     }
-
-    public int getInvoiceId() {
-        return invoiceId;
+    @Override
+    public String getId() {
+        return id;
     }
 
-    public boolean validateInvoiceId(int invoiceId) {
+    public boolean validateInvoiceId(String invoiceId) {
         return (invoices.get(String.valueOf(invoiceId))!=null);
     }
     private boolean deductBalance() {
         return true;
     }
     public boolean pay() {
-        if (!validateInvoiceId(invoiceId))
+        if (!validateInvoiceId(id))
             return false;
 
         if (deductBalance()) {
@@ -43,7 +43,7 @@ public class Payment {//extends Customer {
     }
     private void updateInvoice(String status) {
         invoices.put(
-                String.valueOf(invoiceId),
+                String.valueOf(id),
                 JSWriter.getNewJsonNode()
                         .put("customerId", customerId)
                         .put("status", status)

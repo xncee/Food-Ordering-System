@@ -28,6 +28,17 @@ public class Application implements ApplicationData, Color {
         initializeOrders();
     }
 
+    public String getNewId(String prefix, List<Customer> list) {
+        // ((Customer) customersList.get(0)).
+        String str;
+        if (!list.isEmpty()) {
+            str = list.get(list.size() - 1).getId().split(prefix)[1];
+        }
+        else
+            str = "0";
+        return prefix+(Integer.parseInt(str)+1);
+    }
+
     public Customer getCustomer(JsonNode node, String id) {
         if (node==null) return null;
         String name = node.get("customerName").asText();
@@ -37,9 +48,9 @@ public class Application implements ApplicationData, Color {
         return new Customer(id, name, phoneNumber, balance);
     }
     public Customer getCustomer(String id) {
-        for (Customer customer: customersList) {
+        for (Identifiable customer: customersList) {
             if (customer.getId().equals(id))
-                return customer;
+                return (Customer) customer;
         }
 
         return null;
@@ -58,7 +69,7 @@ public class Application implements ApplicationData, Color {
         if (node==null) return null;
         String restaurantId = node.get("restaurantId").asText();
         Restaurant restaurant = getRestaurant(restaurantId);
-        ArrayList<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
         for (JsonNode jsonNode: node) {
             String itemId = jsonNode.get("id").asText();
             String name = jsonNode.get("name").asText();
@@ -84,9 +95,9 @@ public class Application implements ApplicationData, Color {
         return new Menu(menuId, restaurant, items);
     }
     public Menu getMenu(String id) {
-        for (Menu menu: menusList) {
+        for (Identifiable menu: menusList) {
             if (menu.getId().equals(id))
-                return menu;
+                return (Menu) menu;
         }
 
         return null;
@@ -100,9 +111,9 @@ public class Application implements ApplicationData, Color {
         }
     }
 
-    public List<Review> getReviews(JsonNode node, String id) {
+    public List<Identifiable> getReviews(JsonNode node, String id) {
         if (node==null) return null;
-        List<Review> reviews = new ArrayList<>();
+        List<Identifiable> reviews = new ArrayList<>();
         for (JsonNode jsonNode: node) {
             String customerId = jsonNode.get("customer").asText();
             Customer customer = getCustomer(customerId);
@@ -113,8 +124,8 @@ public class Application implements ApplicationData, Color {
 
         return reviews;
     }
-    public List<Review> getReviews(String id) {
-        for (List<Review> reviewList: reviewsList) {
+    public List<Identifiable> getReviews(String id) {
+        for (List<Identifiable> reviewList: reviewsList) {
             if (reviewList.get(0).getId().equals(id))
                 return reviewList;
         }
@@ -125,7 +136,7 @@ public class Application implements ApplicationData, Color {
     private void initializeReviews() {
         Iterator<String> ids = reviewsJson.fieldNames();
         for (JsonNode node: reviewsJson) {
-            List<Review> r = getReviews(node, ids.next());
+            List<Identifiable> r = getReviews(node, ids.next());
             if (r!=null)
                 reviewsList.add(r);
         }
@@ -134,19 +145,20 @@ public class Application implements ApplicationData, Color {
     public Restaurant getRestaurant(JsonNode node, String id) {
         if (node==null) return null;
         String name = node.get("name").asText();
+        String phoneNumber = node.get("phoneNumber").asText();
         String location = node.get("location").asText();
         String description = node.get("description").asText();
         String menuId = node.get("menu").asText();
         Menu menu = getMenu(menuId);
         String reviewsId = node.get("reviews").asText();
-        List<Review> reviews = getReviews(reviewsId);
+        List<Identifiable> reviews = getReviews(reviewsId);
 
-        return new Restaurant(id, name, location, description, menu, reviews);
+        return new Restaurant(id, name, phoneNumber, location, description, menu, reviews);
     }
     public Restaurant getRestaurant(String id) {
-        for (Restaurant restaurant: restaurantsList) {
+        for (Identifiable restaurant: restaurantsList) {
             if (restaurant.getId().equals(id))
-                return restaurant;
+                return (Restaurant) restaurant;
         }
 
         return null;
@@ -194,9 +206,9 @@ public class Application implements ApplicationData, Color {
         return new Invoice(id, order, amount, date);
     }
     public Invoice getInvoice(String id) {
-        for (Invoice invoice: invoicesList) {
+        for (Identifiable invoice: invoicesList) {
             if (invoice.getId().equals(id))
-                return invoice;
+                return (Invoice) invoice;
         }
 
         return null;
@@ -210,27 +222,18 @@ public class Application implements ApplicationData, Color {
         }
     }
 
-//    public Item getItem(String id) {
-//        for (Item item: itemsList) {
-//            if (invoice.getId().equals(id))
-//                return invoice;
-//        }
-//
-//        return null;
-//    }
-
     public Item getItem(String id) {
-        for (Item item: itemsList) {
+        for (Identifiable item: itemsList) {
             if (item.getId().equals(id))
-                return item;
+                return (Item) item;
         }
 
         return null;
     }
     public Order getOrder(JsonNode node, String id) {
         if (node==null) return null;
-        // String id, List<Item> items, List<Promo> promos, Customer customer, String status, double total, Invoice invoice, String deliveryAddress, LocalDateTime datetime
         List<Item> items = new ArrayList<>();
+        // I'm not sure if this works (test it)
         for (JsonNode jsonNode: node.get("items")) {
             items.add(getItem(jsonNode.asText()));
         }
@@ -249,9 +252,9 @@ public class Application implements ApplicationData, Color {
         return new Order(id, items, promos, customer, total, invoice, address, datetime, status);
     }
     public Order getOrder(String id) {
-        for (Order order: ordersList) {
+        for (Identifiable order: ordersList) {
             if (order.getId().equals(id))
-                return order;
+                return (Order) order;
         }
 
         return null;

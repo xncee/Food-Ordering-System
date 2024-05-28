@@ -1,6 +1,6 @@
 package food.saif;
 
-public class Review {
+public class Review implements Identifiable {
     private String id;
     private Customer customer;
     private int rating; // ★ ★ ★ ★ ★

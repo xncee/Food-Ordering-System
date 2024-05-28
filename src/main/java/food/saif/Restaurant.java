@@ -1,51 +1,28 @@
 package food.saif;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import food.mahmoud.Menu;
 import food.roba.Item;
 
 import java.util.List;
 
-public class Restaurant {
-    private String id;
-    private String name;
+public class Restaurant extends User {
     private String location;
     private String description;
-    private List<Review> reviews;
     private Menu menu;
+    private List<Identifiable> reviews;
 
-    public Restaurant(String id, String name, String location, String description, Menu menu, List<Review> reviews) {
-        this.id = id;
-        this.name = name;
+    public Restaurant(String id, String name, String phoneNumber, String location, String description, Menu menu, List<Identifiable> reviews) {
+        super(id, name, phoneNumber);
         this.location = location;
         this.description = description;
         this.menu = menu;
-    }
-
-    public static String getNewId() {
-        return "REST";
+        this.reviews = reviews;
     }
 
     public void displayMenu() {
         for (Item item: menu.getItems()) {
             System.out.println(item);
         }
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getLocation() {
@@ -64,19 +41,29 @@ public class Restaurant {
         this.description = description;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
     public Menu getMenu() {
         return menu;
     }
 
     public void setMenu(Menu menu) {
         this.menu = menu;
+    }
+
+    public List<Identifiable> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Identifiable> reviews) {
+        this.reviews = reviews;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"\nRestaurant{" +
+                "location=" + location +
+                ", description=" + description +
+                ", menu=" + menu +
+                ", reviews=" + reviews +
+                "}";
     }
 }

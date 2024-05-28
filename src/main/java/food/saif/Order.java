@@ -1,19 +1,14 @@
 package food.saif;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import food.roba.Item;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class Order {
+public class Order implements Identifiable {
     private String id;
-    List<Item> items;
+    private List<Item> items;
     private List<Promo> promos;
     private Customer customer;
     private String status;
@@ -42,36 +37,33 @@ public class Order {
         setStatus("canceled");
     }
 
-    public void addItem(int itemId) {
-        double price = Item.getPrice(itemId);
-        items.add(itemId);
+    public void addItem(Item item) {
+        double price = item.getPrice();
+        items.add(item);
     }
-    public void removeItem(int itemId) {
-        items.remove(itemId);
+    public void removeItem(Item item) {
+        items.remove(item);
     }
-    public List<Integer> getItems() {
-        return items;
-    }
-    public boolean addPromoCode(String code) {
-        if (appliedPromoCodes.contains(code)) {
-            System.out.println("This discount was already applied.");
-            return false;
-        }
-        double percentage = usePromoCode(code);
-        if (percentage!=-1) {
-            double discount = total*percentage/100;
-            if (discount<total) {
-                totalDiscount += percentage;
-                appliedPromoCodes.add(code);
-
-                System.out.println(percentage+"% discount was applied.");
-                total-=discount;
-                return true;
-            }
-        }
-        System.out.println("This promo code is invalid.");
-        return false;
-    }
+//    public boolean addPromoCode(String code) {
+//        if (appliedPromoCodes.contains(code)) {
+//            System.out.println("This discount was already applied.");
+//            return false;
+//        }
+//        double percentage = usePromoCode(code);
+//        if (percentage!=-1) {
+//            double discount = total*percentage/100;
+//            if (discount<total) {
+//                totalDiscount += percentage;
+//                appliedPromoCodes.add(code);
+//
+//                System.out.println(percentage+"% discount was applied.");
+//                total-=discount;
+//                return true;
+//            }
+//        }
+//        System.out.println("This promo code is invalid.");
+//        return false;
+//    }
     public void calculateTotal() {
         double total = 0;
         for (Item item: items) {
@@ -80,6 +72,7 @@ public class Order {
         this.total = total;
     }
 
+    @Override
     public String getId() {
         return id;
     }
@@ -90,6 +83,10 @@ public class Order {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 
     public List<Promo> getPromos() {
@@ -124,7 +121,7 @@ public class Order {
         this.total = total;
     }
 
-    public Invoice getInvoice() {
+    public Identifiable getInvoice() {
         return invoice;
     }
 
@@ -150,6 +147,16 @@ public class Order {
 
     @Override
     public String toString() {
-        return orders.get(String.valueOf(id)).toPrettyString();
+        return "Order{" +
+                "id=" + id  +
+                ", items=" + Arrays.toString(items.toArray()) +
+                ", promos=" + Arrays.toString(promos.toArray()) +
+                ", customer=" + customer +
+                ", status=" + status +
+                ", total=" + total +
+                ", invoice=" + invoice +
+                ", deliveryAddress=" + deliveryAddress +
+                ", datetime=" + datetime +
+                "}";
     }
 }

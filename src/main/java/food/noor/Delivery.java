@@ -1,6 +1,7 @@
 
 package food.noor;
 
+import food.saif.Identifiable;
 import food.saif.Order;
 /*
 @Saif, May 28th 2024
@@ -13,7 +14,7 @@ Feedback:
 5- in 'calculateDeliveryFee' method, deliveryTime isn't needed to calculate the fee.
 6- 'assignDriver' method was already defined in Order class.
  */
-public class Delivery implements DeliveryServices {
+public class Delivery implements DeliveryServices, Identifiable {
     private final double DELIVERY_RATE_PER_KM = 0.1;
     private String id;
     private String location;
@@ -27,6 +28,7 @@ public class Delivery implements DeliveryServices {
 
     public Delivery(String id, String location, Order order, Driver driver, String status, double distance, String deliveryTime) {
         this.id = id;
+        this.location = location;
         this.driver = driver;
         this.order = order;
         this.status = status;
@@ -45,6 +47,7 @@ public class Delivery implements DeliveryServices {
 
     //public void assignDriver(String driver , int deliveryId) {System.out.println("Driver name : " + driver + "Driver ID : " + deliveryId);}
 
+    @Override
     public String getId() {
         return id;
     }

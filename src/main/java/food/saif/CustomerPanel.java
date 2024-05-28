@@ -6,16 +6,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class UserPanel implements Color {
+public class CustomerPanel implements Color {
     static Scanner input = new Scanner(System.in);
+    final static Application application = new Application("Talabat");
     static Login user;
     static Customer customer;
-    static Payment payment;
-    static Restaurant restaurants;
 
     public static void main(String[] args) {
         System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-        //System.out.println("Welcome to ");
+
         homePage();
 
     }
@@ -67,22 +66,19 @@ public class UserPanel implements Color {
                 isUsernameValid = isPasswordValid = user.signIn(username, password);
         }
 
-        System.out.println(GREEN+"\nYou have been successfully logged in."+RESET);
-
+        System.out.println(GREEN+"You have been successfully logged in."+RESET);
+        String customerId = user.getCustomerId();
+        customer = application.getCustomer(customerId);
     }
 
     public static void homePage() {
         if (user==null || !user.isLoggedIn) loginPage();
 
-        String customerId = user.getCustomerId();
-        customer = new Customer(customerId);
-
         System.out.println("\n# Home Page");
-        System.out.println("1) Your Account");
-        System.out.println("2) Order");
-        System.out.println("3) Cart");
+        System.out.println("1. Account");
+        System.out.println("2. Order");
+        System.out.println("3. Cart");
         System.out.println("99) <<");
-        System.out.print("=> ");
         int choice = getUserInput(new int[] {1, 2, 3, 99});
         if (choice==1) {
             accPage();

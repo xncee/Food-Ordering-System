@@ -1,13 +1,11 @@
-package food.noor;
+package food.saif;
 
-import food.saif.Identifiable;
-
-public class Driver implements Identifiable {
+public class User implements ApplicationData, Identifiable {
     private String id;
     private String name;
     private String phoneNumber;
 
-    public Driver(String id, String name, String phoneNumber) {
+    public User(String id, String name, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -40,10 +38,10 @@ public class Driver implements Identifiable {
 
     @Override
     public String toString() {
-        return "Driver{" +
-                "id=" + id +
+        return "User{" +
+                "id=" + id  +
                 ", name=" + name +
                 ", phoneNumber=" + phoneNumber +
-                "}";
+                '}';
     }
 }

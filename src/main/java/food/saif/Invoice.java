@@ -3,7 +3,7 @@ package food.saif;
 
 import java.time.LocalDate;
 
-public class Invoice {
+public class Invoice implements Identifiable {
     private String id;
     private Order order;
     private double amount;
@@ -16,6 +16,7 @@ public class Invoice {
         this.date = date;
     }
 
+    @Override
     public String getId() {
         return id;
     }

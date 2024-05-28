@@ -1,9 +1,10 @@
 {
   "REST1": {
     "name": "shawarma king",
+    "phoneNumber": "",
     "location": "",
     "description": "restaurant that makes the best shawarma",
-    "menu": "M1",
+    "menu": "MENU1",
     "reviews": "REV1"
   }
 }

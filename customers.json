@@ -1,27 +1,7 @@
 {
-  "1" : {
+  "CUST1" : {
     "customerName" : "saif alkhalili",
     "phoneNumber" : "",
-    "balance" : 0
-  },
-  "2" : {
-    "customerName" : "roba m",
-    "balance" : 0
-  },
-  "3" : {
-    "customerName" : "saif alkhalili",
-    "balance" : 0
-  },
-  "4" : {
-    "customerName" : "roba m",
-    "balance" : 0
-  },
-  "5" : {
-    "customerName" : "moha q",
-    "balance" : 0
-  },
-  "6" : {
-    "customerName" : "gugui",
     "balance" : 0
   }
 }
