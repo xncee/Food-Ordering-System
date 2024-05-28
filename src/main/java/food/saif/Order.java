@@ -19,11 +19,8 @@ public class Order {
     private String status;
     private double total;
     private Invoice invoice;
-    private String deliveryAddress;
+    private String deliveryAddress; // change it to Delivery
     private LocalDateTime datetime;
-    // ★ ★ ★ ★ ★
-    // ★ ★ ★ ★ ★
-
 
     public Order(String id, List<Item> items, List<Promo> promos, Customer customer, double total, Invoice invoice, String deliveryAddress, LocalDateTime datetime, String status) {
         this.id = id;
@@ -77,8 +74,8 @@ public class Order {
     }
     public void calculateTotal() {
         double total = 0;
-        for (int item: items) {
-            total += Item.getPrice(item);
+        for (Item item: items) {
+            total += item.getPrice();
         }
         this.total = total;
     }
