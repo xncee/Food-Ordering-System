@@ -1,15 +1,17 @@
 package food.saif;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Customer extends User {
     private String email;
+    private String address;
     private double balance;
-    private LocalDateTime datetime;
+    private LocalDate datetime;
 
-    public Customer(String id, String name, String email, String phoneNumber, double balance, LocalDateTime datetime) {
+    public Customer(String id, String name, String email, String phoneNumber, String address, double balance, LocalDate datetime) {
         super(id, name, phoneNumber);
         this.email = email;
+        this.address = address;
         this.balance = balance;
         this.datetime = datetime;
     }
@@ -22,6 +24,14 @@ public class Customer extends User {
         this.email = email;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public double getBalance() {
         return balance;
     }
@@ -30,11 +40,11 @@ public class Customer extends User {
         this.balance = balance;
     }
 
-    public LocalDateTime getDatetime() {
+    public LocalDate getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(LocalDateTime datetime) {
+    public void setDatetime(LocalDate datetime) {
         this.datetime = datetime;
     }
 

@@ -1,5 +1,6 @@
 package food.saif;
 
+import food.noor.Delivery;
 import food.roba.Item;
 
 import java.time.LocalDateTime;
@@ -13,24 +14,21 @@ public class Order implements Identifiable {
     private Customer customer;
     private String status;
     private double total;
-    private Invoice invoice;
-    private String deliveryAddress; // change it to Delivery
+    private Delivery delivery; // c
     private LocalDateTime datetime;
 
-    public Order(String id, List<Item> items, List<Promo> promos, Customer customer, double total, Invoice invoice, String deliveryAddress, LocalDateTime datetime, String status) {
+    public Order(String id, List<Item> items, List<Promo> promos, Customer customer, double total, Delivery delivery, LocalDateTime datetime, String status) {
         this.id = id;
         this.items = items;
         this.promos = promos;
         this.customer = customer;
         this.total = total;
-        this.invoice = invoice;
-        this.deliveryAddress = deliveryAddress;
+        this.delivery = delivery;
         this.datetime = datetime;
         this.status = status;
     }
 
     public void confirmOrder() {
-        System.out.println("Order confirmed.");
         setStatus("confirmed");
     }
     public void cancelOrder() {
@@ -121,20 +119,12 @@ public class Order implements Identifiable {
         this.total = total;
     }
 
-    public Identifiable getInvoice() {
-        return invoice;
+    public Delivery getDelivery() {
+        return delivery;
     }
 
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
-    }
-
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
     }
 
     public LocalDateTime getDatetime() {
@@ -154,8 +144,7 @@ public class Order implements Identifiable {
                 ", customer=" + customer +
                 ", status=" + status +
                 ", total=" + total +
-                ", invoice=" + invoice +
-                ", deliveryAddress=" + deliveryAddress +
+                ", delivery=" + delivery.toString() +
                 ", datetime=" + datetime +
                 "}";
     }

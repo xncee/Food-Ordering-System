@@ -1,0 +1,22 @@
+{
+  "DRIVER1": {
+    "name": "Ahmed",
+    "phoneNumber": "+962779123456"
+  },
+  "DRIVER2": {
+    "name": "Youssef",
+    "phoneNumber": "+962778234567"
+  },
+  "DRIVER3": {
+    "name": "Omar",
+    "phoneNumber": "+962779345678"
+  },
+  "DRIVER4": {
+    "name": "Ali",
+    "phoneNumber": "+962779456789"
+  },
+  "DRIVER5": {
+    "name": "Khalid",
+    "phoneNumber": "+962778567890"
+  }
+}

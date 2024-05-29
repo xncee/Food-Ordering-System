@@ -6,26 +6,21 @@ import food.roba.Item;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
+import static food.saif.CustomerPanel.waitFor;
 import static food.saif.CustomerPanel.getUserInput;
-import static food.saif.CustomerPanel.input;
 import static food.saif.design.Color.*;
 
 public class AdminPanel implements ApplicationData {
+    static Scanner input = new Scanner(System.in);
     final static Application application = new Application("Talabat");
     public static void main(String[] args) {
         homePage();
     }
-
-    public static void wait(int seconds) {
-        try {
-            Thread.sleep(seconds*1000L);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    
     public static void homePage() {
-        wait(1);
+        waitFor(1);
         System.out.println("\n# Home Page");
         System.out.println("1. Restaurants");
         System.out.println("2. Customers");
@@ -52,7 +47,7 @@ public class AdminPanel implements ApplicationData {
     }
 
     public static void restaurantsPage() {
-        wait(1);
+        waitFor(1);
         System.out.println("\n# Restaurants Page");
         System.out.println("1. View Restaurants");
         System.out.println("2. Manage Restaurants");
@@ -78,7 +73,7 @@ public class AdminPanel implements ApplicationData {
     }
 
     public static void customersPage() {
-        wait(1);
+        waitFor(1);
         System.out.println("\n# Customers Page");
         System.out.println("1. View Customers");
         System.out.println("2. Search");
@@ -109,7 +104,7 @@ public class AdminPanel implements ApplicationData {
     }
 
     public static void ordersPage() {
-        wait(1);
+        waitFor(1);
         System.out.println("\n# Orders Page");
         System.out.println("1. View Orders");
         System.out.println("2. Search");
@@ -169,7 +164,7 @@ public class AdminPanel implements ApplicationData {
     }
 
     public static void restaurantSearchPage(boolean oneTime) {
-        wait(1);
+        waitFor(1);
         System.out.println("\n# Manage Restaurants Page");
         System.out.println("1. Search by id");
         System.out.println("2. Search by name");
@@ -211,7 +206,7 @@ public class AdminPanel implements ApplicationData {
 
     }
     public static void manageRestaurantsPage() {
-        wait(1);
+        waitFor(1);
         System.out.println("\n# Manage Restaurants Page");
         System.out.println("1. Add Restaurant");
         System.out.println("2. Remove Restaurant");

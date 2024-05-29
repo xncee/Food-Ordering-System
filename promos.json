@@ -1,6 +1,27 @@
 {
-  "s50" : {
-    "percentage" : 0.50,
-    "expirationDate" : "2024-05-29"
+  "PROMO1": {
+    "code": "SAVE50",
+    "discountPercentage": 0.50,
+    "expirationDate": "2024-05-28"
+  },
+  "PROMO2": {
+    "code": "SAVE20",
+    "discountPercentage": 0.20,
+    "expirationDate": "2025-05-29"
+  },
+  "PROMO3": {
+    "code": "SPECIAL10",
+    "discountPercentage": 0.10,
+    "expirationDate": "2024-06-30"
+  },
+  "PROMO4": {
+    "code": "SUMMER15",
+    "discountPercentage": 0.15,
+    "expirationDate": "2024-08-31"
+  },
+  "PROMO5": {
+    "code": "FESTIVE25",
+    "discountPercentage": 0.25,
+    "expirationDate": "2024-12-31"
   }
 }

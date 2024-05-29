@@ -3,6 +3,7 @@ package food.saif;
 import food.saif.design.Color;
 import food.saif.io.JsonFileWriter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,30 +14,40 @@ public class Login implements ApplicationData, Color {
     private String name;
     private String email;
     private String phoneNumber;
+    private String address;
 
     public boolean isLoggedIn;
     public Login(String username, String password) {
         isLoggedIn = signIn(username, password);
     }
-    public Login(String username, String password, String name, String email, String phoneNumber) {
-        isLoggedIn = signUp(username, password, name, email, phoneNumber);
+    public Login(String username, String password, String name, String email, String phoneNumber, String address) {
+        isLoggedIn = signUp(username, password, name, email, phoneNumber, address);
         if (isLoggedIn) addNewUser();
     }
 
     private void addNewUser() {
         if (customersJson.get(id)==null) {
-            usersJson.put(
-                    username,
-                    JsonFileWriter.getNewJsonNode()
-                            .put("id", id)
-                            .put("username", username)
-                            .put("password", password)
-                            .put("phoneNumber", phoneNumber)
-            );
-            LocalDateTime datetime = LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a")));
-            Customer customer = new Customer(id, name, email, phoneNumber, 0.0, datetime);
+            updateUser(); // adding info to users.json file
+            LocalDate datetime = LocalDate.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a")));
+            Customer customer = new Customer(id, name, email, phoneNumber, address, 0.0, datetime);
             Application.add(customer);
+            //Application.updateCustomers();
         }
+    }
+
+    private void updateUser() {
+        if (customersJson.get(id)==null) return;
+
+        usersJson.put(
+                username,
+                JsonFileWriter.getNewJsonNode()
+                        .put("id", id)
+                        .put("username", username)
+                        .put("password", password)
+                        .put("email", email)
+                        .put("phoneNumber", phoneNumber)
+        );
+        Application.updateUsers();
     }
 
     private boolean signIn(String username, String password) {
@@ -83,7 +94,7 @@ public class Login implements ApplicationData, Color {
     private boolean isPhoneNumberValid(String phoneNumber) {
         return true;
     }
-    private boolean signUp(String username, String password, String name, String email, String phoneNumber) {
+    private boolean signUp(String username, String password, String name, String email, String phoneNumber, String address) {
         username = username.toLowerCase();
         if (!isUsernameAvailable(username)) {
             System.out.println(RED+"Username isn't available!"+RESET);
@@ -111,10 +122,25 @@ public class Login implements ApplicationData, Color {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.address = address;
 
         return true;
     }
 
+    public boolean changePassword(String currentPassword, String newPassword) {
+        if (!currentPassword.equals(password)) {
+            System.out.println(RED+"Incorrect password."+RESET);
+            return false;
+        }
+        if (!isPasswordValid(newPassword)) {
+            System.out.println(RED+"New password is invalid."+RESET);
+            System.out.println(YELLOW+"*password must be at least 8 characters."+RESET);
+        }
+
+        this.password = newPassword;
+        updateUser();
+        return true;
+    }
     public String getId() {
         return id;
     }

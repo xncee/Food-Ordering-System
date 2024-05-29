@@ -2,7 +2,7 @@
 package food.noor;
 
 import food.saif.Identifiable;
-import food.saif.Order;
+
 /*
 @Saif, May 28th 2024
 Feedback:
@@ -18,29 +18,39 @@ public class Delivery implements DeliveryServices, Identifiable {
     private final double DELIVERY_RATE_PER_KM = 0.1;
     private String id;
     private String location;
-    private Order order;
+    private String order;
     private Driver driver;
     private String status;
     private double distance;
-    private String deliveryTime;
+    //private int deliveryTime; // in minutes
 
-    public Delivery(String id, String location, Order order, Driver driver, String status, double distance, String deliveryTime) {
+    public Delivery(String id, String location, String order, Driver driver, String status, double distance) {
         this.id = id;
         this.location = location;
         this.driver = driver;
         this.order = order;
         this.status = status;
         this.distance = distance;
-        this.deliveryTime = deliveryTime;
     }
 
-    public void updateStatus(String newStatus) {
-        System.out.println("Delivery status : " + newStatus);
+    public void updateStatus(String status) {
+        this.status = status;
+        System.out.println("Delivery status: " + status);
     }
 
     @Override
-    public double calculateDeliveryFee(double distance) {
+    public double calculateDeliveryFee() {
         return distance*DELIVERY_RATE_PER_KM;
+    }
+    @Override
+    public int calculateDeliveryTime() {
+        // distance = speed*hours
+        // hours = distance/speed
+        // mins = hours*60
+        double speed = 60.0; // km/h
+        int deliveryTime = (int) ((distance/speed)*60);
+
+        return deliveryTime;
     }
 
     //public void assignDriver(String driver , int deliveryId) {System.out.println("Driver name : " + driver + "Driver ID : " + deliveryId);}
@@ -70,11 +80,11 @@ public class Delivery implements DeliveryServices, Identifiable {
         this.driver = driver;
     }
 
-    public Order getOrder() {
+    public String getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(String order) {
         this.order = order;
     }
 
@@ -94,23 +104,13 @@ public class Delivery implements DeliveryServices, Identifiable {
         this.distance = distance;
     }
 
-    public String getDeliveryTime() {
-        return deliveryTime;
-    }
-
-    public void setDeliveryTime(String deliveryTime) {
-        this.deliveryTime = deliveryTime;
-    }
-
     @Override
     public String toString() {
         return "Delivery{" +
-                "id=" + id +
-                ", driver=" + driver +
-                ", order=" + order +
+                "driver=" + driver.getName() +
                 ", status=" + status +
-                ", distance=" + distance +
-                ", deliveryTime=" + deliveryTime +
+                ", deliveryFee=" + calculateDeliveryFee() +
+                ", deliveryTime=" + calculateDeliveryTime() +
                 '}';
     }
 }

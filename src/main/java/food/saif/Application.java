@@ -3,6 +3,8 @@ package food.saif;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import food.mahmoud.Menu;
+import food.noor.Delivery;
+import food.noor.Driver;
 import food.roba.HealthyFood;
 import food.roba.Item;
 import food.roba.JunkFood;
@@ -11,36 +13,37 @@ import food.saif.design.Color;
 import javax.management.InvalidAttributeValueException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Application implements ApplicationData, Color {
     public final String NAME;
-    HashMap<Class<?>, List<?>> listsMap = new HashMap<>();
+    //HashMap<Class<?>, List<?>> listsMap = new HashMap<>();
 
     public Application(String NAME) {
         this.NAME = NAME;
 
-        listsMap.put(Customer.class, customersList);
-        listsMap.put(Menu.class, menusList);
-        listsMap.put(Review.class, reviewsList);
-        listsMap.put(Restaurant.class, reviewsList);
-        listsMap.put(Promo.class, promosList);
-        listsMap.put(Invoice.class, invoicesList);
-        listsMap.put(Order.class, ordersList);
-
+        // no need to initialize users.
+        initializeDrivers();
+        initializeDeliveries();
         initializeCustomers();
         initializeItems();
         initializeMenus();
         initializeReviews();
         initializeRestaurants();
         initializePromos();
-        initializeInvoices();
         initializeOrders();
     }
 
     private static List getList(Object o) throws InvalidAttributeValueException {
         if (o instanceof Customer)
             return customersList;
+        else if (o instanceof Driver)
+            return driversList;
+        else if (o instanceof Delivery)
+            return deliveriesList;
+        else if (o instanceof Item)
+            return itemsList;
         else if (o instanceof Menu)
             return menusList;
         else if (o instanceof Review)
@@ -49,8 +52,6 @@ public class Application implements ApplicationData, Color {
             return restaurantsList;
         else if (o instanceof Promo)
             return promosList;
-        else if (o instanceof Invoice)
-            return invoicesList;
         else if (o instanceof Order)
             return ordersList;
         else
@@ -89,15 +90,74 @@ public class Application implements ApplicationData, Color {
         return prefix+(Integer.parseInt(str)+1);
     }
 
+    public Driver getDriver(JsonNode node, String id) {
+        if (node==null) return null;
+        String name = node.get("name").asText();
+        String phoneNumber = node.get("phoneNumber").asText();
+
+        return new Driver(id, name, phoneNumber);
+    }
+    public Driver getDriver(String id) {
+        for (Identifiable driver: driversList) {
+            if (driver.getId().equals(id))
+                return (Driver) driver;
+        }
+
+        return null;
+    }
+    public void initializeDrivers() {
+        Iterator<String> ids = driversJson.fieldNames();
+        for (JsonNode node: driversJson) {
+            Driver c = getDriver(node, ids.next());
+            if (c!=null)
+                driversList.add(c);
+        }
+    }
+
+    public Delivery getDelivery(JsonNode node, String id) {
+        if (node==null) return null;
+        String deliveryId = node.get("id").asText();
+        String location = node.get("location").asText();
+        String order = node.get("order").asText();
+        String driverId = node.get("driver").asText();
+        Driver driver = getDriver(driverId);
+        String status = node.get("status").asText();
+        double distance = node.get("distance").asDouble();
+
+        return new Delivery(deliveryId, location, order, driver, status, distance);
+    }
+    public Delivery getDelivery(String id) {
+        for (Identifiable delivery: deliveriesList) {
+            if (delivery.getId().equals(id))
+                return (Delivery) delivery;
+        }
+
+        return null;
+    }
+    public void initializeDeliveries() {
+        Iterator<String> ids = deliveriesJson.fieldNames();
+        for (JsonNode node: deliveriesJson) {
+            Delivery c = getDelivery(node, ids.next());
+            if (c!=null)
+                deliveriesList.add(c);
+        }
+    }
     public Customer getCustomer(JsonNode node, String id) {
         if (node==null) return null;
         String name = node.get("customerName").asText();
         String email = node.get("email").asText();
         String phoneNumber = node.get("phoneNumber").asText();
-        double balance = node.get("balance").asInt();
-        LocalDateTime date = LocalDateTime.parse(node.get("date").asText());
+        String address = node.get("address").asText();
+        double balance = node.get("balance").asDouble();
+        LocalDate date;
+        try {
+            date = LocalDate.parse(node.get("date").asText());
+        }
+        catch (DateTimeParseException e) {
+            date = LocalDate.now();
+        }
 
-        return new Customer(id, name, email, phoneNumber, balance, date);
+        return new Customer(id, name, email, phoneNumber, address, balance, date);
     }
 
     public Customer getCustomer(String id) {
@@ -252,53 +312,26 @@ public class Application implements ApplicationData, Color {
 
         return new Promo(id, percentage, expirationDate);
     }
-    public Promo getPromo(String id) {
+    public Promo getPromo(String code) {
         for (Promo promo: promosList) {
-            if (promo.getId().equals(id))
+            if (promo.getCode().equals(code))
                 return promo;
         }
 
         return null;
     }
     private void initializePromos() {
-        Iterator<String> ids = promosJson.fieldNames();
+        Iterator<String> codes = promosJson.fieldNames();
         for (JsonNode node: promosJson) {
-            Promo m = getPromo(node, ids.next());
+            Promo m = getPromo(node, codes.next());
             if (m!=null)
                 promosList.add(m);
-        }
-    }
-
-    public Invoice getInvoice(JsonNode node, String id) {
-        if (node==null) return null;
-        String orderId = node.get("order").asText();
-        Order order = getOrder(orderId);
-        double amount = node.get("amount").asDouble();
-        LocalDate date = LocalDate.parse(node.get("date").asText());
-
-        return new Invoice(id, order, amount, date);
-    }
-    public Invoice getInvoice(String id) {
-        for (Identifiable invoice: invoicesList) {
-            if (invoice.getId().equals(id))
-                return (Invoice) invoice;
-        }
-
-        return null;
-    }
-    private void initializeInvoices() {
-        Iterator<String> ids = invoicesJson.fieldNames();
-        for (JsonNode node: invoicesJson) {
-            Invoice i = getInvoice(node, ids.next());
-            if (i!=null)
-                invoicesList.add(i);
         }
     }
 
     public Order getOrder(JsonNode node, String id) {
         if (node==null) return null;
         List<Item> items = new ArrayList<>();
-        // I'm not sure if this works (test it)
         for (JsonNode jsonNode: node.get("items")) {
             items.add(getItem(jsonNode.asText()));
         }
@@ -310,11 +343,11 @@ public class Application implements ApplicationData, Color {
         Customer customer = getCustomer(node.get("customer").asText());
         String status = node.get("status").asText();
         double total = node.get("total").asDouble();
-        Invoice invoice = getInvoice(node.get("invoice").asText());
-        String address = node.get("address").asText();
+        String deliveryId = node.get("delivery").asText();
+        Delivery delivery = getDelivery(deliveryId);
         LocalDateTime datetime = LocalDateTime.parse(node.get("datetime").asText());
 
-        return new Order(id, items, promos, customer, total, invoice, address, datetime, status);
+        return new Order(id, items, promos, customer, total, delivery, datetime, status);
     }
     public Order getOrder(String id) {
         for (Identifiable order: ordersList) {
@@ -333,6 +366,9 @@ public class Application implements ApplicationData, Color {
         }
     }
 
+    public static void updateUsers() {
+        usersFile.write();
+    }
     public static void updateRestaurants() {
         restaurantsJson.removeAll();
         for (Identifiable r: restaurantsList) {

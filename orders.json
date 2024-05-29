@@ -4,7 +4,6 @@
     "promos" : [ "s50" ],
     "customer" : "CUSTOMER1",
     "total" : 400.0,
-    "invoice" : "INVOICE1",
     "address" : "Amman, Jordan",
     "datetime" : "2024-04-29T03:02:32.599889400",
     "status" : "confirmed"
@@ -14,7 +13,6 @@
     "promos" : [  ],
     "customer" : "CUSTOMER1",
     "total" : 400.0,
-    "invoice" : "INVOICE1",
     "address" : "Amman, Jordan",
     "datetime" : "2024-04-29T03:02:32.599889400",
     "status" : "open"

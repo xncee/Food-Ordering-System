@@ -1,18 +1,66 @@
 {
-  "REST1" : {
-    "name" : "shawarma king",
-    "phoneNumber" : "",
-    "location" : "",
-    "description" : "restaurant that makes the best shawarma",
-    "menu" : "MENU1",
-    "reviews" : "REV1"
+  "REST1": {
+    "name": "Shawarma 3a Saj",
+    "phoneNumber": "+962798978677",
+    "location": "Al-Rainbow Street, Amman, Jordan",
+    "description": "Authentic Middle Eastern flavors wrapped in freshly baked bread.",
+    "menu": "MENU1",
+    "reviews": "REV1"
   },
-  "REST2" : {
-    "name" : "Burger",
-    "phoneNumber" : "71283",
-    "location" : "df",
-    "description" : "dfsf",
-    "menu" : "MENU3",
-    "reviews" : ""
+  "REST2": {
+    "name": "Burger King",
+    "phoneNumber": "+962776543222",
+    "location": "Mecca Street, Amman, Jordan",
+    "description": "Home of the flame-grilled Whopper.",
+    "menu": "MENU2",
+    "reviews": "REV2"
+  },
+  "REST3": {
+    "name": "Healthy Bites",
+    "phoneNumber": "+962778123456",
+    "location": "Gardens Street, Amman, Jordan",
+    "description": "Nutritious and delicious meals",
+    "menu": "MENU3",
+    "reviews": "REV3"
+  },
+  "REST4": {
+    "name": "Fresh Eats",
+    "phoneNumber": "+962779654321",
+    "location": "Sweifieh, Amman, Jordan",
+    "description": "Fresh, organic, and tasty",
+    "menu": "MENU4",
+    "reviews": "REV4"
+  },
+  "REST5": {
+    "name": "NutriDelights",
+    "phoneNumber": "+962776789012",
+    "location": "Abdoun, Amman, Jordan",
+    "description": "Healthy delights for every palate",
+    "menu": "MENU5",
+    "reviews": "REV5"
+  },
+  "REST6": {
+    "name": "Wholesome Café",
+    "phoneNumber": "+962779876543",
+    "location": "Jabal Al Weibdeh, Amman, Jordan",
+    "description": "Wholesome meals in a cozy atmosphere",
+    "menu": "MENU6",
+    "reviews": "REV6"
+  },
+  "REST7": {
+    "name": "Organic Treats",
+    "phoneNumber": "+962778654321",
+    "location": "Shmeisani, Amman, Jordan",
+    "description": "Organic treats for a healthy lifestyle",
+    "menu": "MENU7",
+    "reviews": "REV1"
+  },
+  "REST8": {
+    "name": "Green Plate",
+    "phoneNumber": "+962779123456",
+    "location": "Taj Mall, Amman, Jordan",
+    "description": "Green, clean, and serene",
+    "menu": "MENU8",
+    "reviews": "REV2"
   }
 }

@@ -1,13 +1,82 @@
 {
   "MENU1": {
-    "restaurant": "",
+    "restaurant": "Shawarma 3a Saj",
     "items": [
-      "ITEM1",
-      "ITEM2"
+      "ITEM21",
+      "ITEM22",
+      "ITEM23"
     ]
   },
   "MENU2": {
-    "restaurant": "",
-    "items": []
+    "restaurant": "Burger King",
+    "items": [
+      "ITEM1",
+      "ITEM2",
+      "ITEM6"
+    ]
+  },
+  "MENU3": {
+    "restaurant": "Healthy Bites",
+    "items": [
+      "ITEM24",
+      "ITEM25",
+      "ITEM14"
+    ]
+  },
+  "MENU4": {
+    "restaurant": "Fresh Eats",
+    "items": [
+      "ITEM13",
+      "ITEM15",
+      "ITEM16"
+    ]
+  },
+  "MENU5": {
+    "restaurant": "NutriDelights",
+    "items": [
+      "ITEM17",
+      "ITEM18",
+      "ITEM19"
+    ]
+  },
+  "MENU6": {
+    "restaurant": "Wholesome Café",
+    "items": [
+      "ITEM12",
+      "ITEM20",
+      "ITEM24"
+    ]
+  },
+  "MENU7": {
+    "restaurant": "Organic Treats",
+    "items": [
+      "ITEM11",
+      "ITEM19",
+      "ITEM23"
+    ]
+  },
+  "MENU8": {
+    "restaurant": "Green Plate",
+    "items": [
+      "ITEM24",
+      "ITEM25",
+      "ITEM14"
+    ]
+  },
+  "MENU9": {
+    "restaurant": "Fit Food",
+    "items": [
+      "ITEM25",
+      "ITEM17",
+      "ITEM18"
+    ]
+  },
+  "MENU10": {
+    "restaurant": "Veggie Haven",
+    "items": [
+      "ITEM11",
+      "ITEM16",
+      "ITEM24"
+    ]
   }
 }

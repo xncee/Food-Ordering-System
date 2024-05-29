@@ -1,7 +1,10 @@
 package food.saif;
 
 import food.mahmoud.Menu;
+import food.roba.Food;
+import food.roba.HealthyFood;
 import food.roba.Item;
+import food.roba.JunkFood;
 
 import java.util.List;
 
@@ -19,9 +22,38 @@ public class Restaurant extends User {
         this.reviews = reviews;
     }
 
+    public int getOrdersCount() {
+        return reviews.size();
+    }
+    public double getRating() {
+        if (reviews.isEmpty()) return 0.0;
+
+        double sum = 0;
+        for (Identifiable r: reviews) {
+            Review review = (Review) r;
+            sum += review.getRating();
+        }
+
+        return (sum/reviews.size());
+    }
     public void displayMenu() {
-        for (Item item: menu.getItems()) {
-            System.out.println(item);
+        int x = 1;
+        for (Item i: menu.getItems()) {
+            Food foodItem = (Food) i;
+            System.out.println(
+                    (x++) + ". " +
+                    foodItem.getName() + "\n\t"+
+                    foodItem.getDescription()
+            );
+            if (foodItem.isHealthy()) {
+                System.out.println("\t"+"Ingredients: "+((HealthyFood) foodItem).getIngredients());
+                System.out.println("\t"+"Calories: "+((HealthyFood) foodItem).getCalories());
+                System.out.print(", isVegan: "+((HealthyFood) foodItem).isVegan());
+                System.out.println(", isGlutenFree: "+((HealthyFood) foodItem).isGlutenFree());
+                System.out.print("\n\t"+", isOrganic: "+((HealthyFood) foodItem).isOrganic());
+                System.out.println(", isOrganicCertified: "+((HealthyFood) foodItem).organicCertificateAgent());
+            }
+            System.out.println("\n\t"+"$"+foodItem.getPrice());
         }
     }
 

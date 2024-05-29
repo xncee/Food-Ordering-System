@@ -1,11 +1,13 @@
 package food.saif;
 
+import food.saif.design.Color;
 import food.saif.io.JsonFileWriter;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public class Promo {
+public class Promo implements ApplicationData, Color {
     private String code;
     private double percentage; //0.xx
     private LocalDate expirationDate;
@@ -18,30 +20,26 @@ public class Promo {
         this.expirationDate = expirationDate;
     }
 
-//    public static boolean validatePromoCode(String code) {
-//        // ort
-//        code = code.toLowerCase();
-//        return (promoCodes.get(code)!=null && LocalDate.parse(promoCodes.get(code).get("expirationDate").asText()).isAfter(LocalDate.now()));
-//    }
-//    private static double getPercentage(String code) {
-//        return promoCodes.get(code.toLowerCase()).get("percentage").asDouble()*100;
-//    }
-//    public static double usePromoCode(String code) {
-//        if (validatePromoCode(code))
-//            return getPercentage(code);
-//        return -1;
-//    }
-//    private static String generateRandomCode(int length) {
-//        String code = "";
-//        int min = 0;
-//        int max = CHARACTERS.length;
-//        for (int i=0; i<length; i++) {
-//            int randIndex = (int) (min+Math.random()*(max-min));
-//            code += CHARACTERS[randIndex];
-//        }
-//        // possibly duplicated code>
-//        return generateRandomCode(length);
-//    }
+    public static Promo validateCode(String code) {
+        Promo promo = Search.findPromo("code", code);
+        if (promo.expirationDate.isBefore(LocalDate.now())) {
+            System.out.println(RED+"Promo code is expired."+RESET);
+            return null;
+        }
+        return promo;
+    }
+
+    private static String generateRandomCode(int length) {
+        String code = "";
+        int min = 0;
+        int max = CHARACTERS.length;
+        for (int i=0; i<length; i++) {
+            int randIndex = (int) (min+Math.random()*(max-min));
+            code += CHARACTERS[randIndex];
+        }
+        // possibly duplicated code>
+        return generateRandomCode(length);
+    }
 //
 //    public static String addPromoCode(double percentage, LocalDate expirationDate, String code) {
 //        //System.out.println(LocalDateTime.now().plusMonths(2).toLocalDate());
@@ -71,11 +69,16 @@ public class Promo {
 //        return false;
 //    }
 //
-    public String getId() {
+
+    public String getCode() {
         return code;
     }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
+
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
 }

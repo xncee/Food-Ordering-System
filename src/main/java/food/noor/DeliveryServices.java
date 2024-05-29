@@ -1,5 +1,6 @@
 package food.noor;
 
 public interface DeliveryServices {
-    double calculateDeliveryFee(double distance);
+    double calculateDeliveryFee();
+    int calculateDeliveryTime();
 }
