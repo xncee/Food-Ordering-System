@@ -3,17 +3,6 @@ package food.noor;
 
 import food.saif.Identifiable;
 
-/*
-@Saif, May 28th 2024
-Feedback:
-1- zero constructor isn't needed.
-2- 'id' should be String.
-2- 'location' data field is needed.
-3- 'order' data type should be Order not String.
-4- 'driver' data type should be Driver not String.
-5- in 'calculateDeliveryFee' method, deliveryTime isn't needed to calculate the fee.
-6- 'assignDriver' method was already defined in Order class.
- */
 public class Delivery implements DeliveryServices, Identifiable {
     private final double DELIVERY_RATE_PER_KM = 0.1;
     private String id;

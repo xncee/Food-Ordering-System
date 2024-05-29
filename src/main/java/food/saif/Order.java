@@ -2,12 +2,13 @@ package food.saif;
 
 import food.noor.Delivery;
 import food.roba.Item;
+import food.saif.design.Color;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-public class Order implements Identifiable {
+public class Order implements Identifiable, Color {
     private String id;
     private Restaurant restaurant;
     private List<Item> items;
@@ -15,19 +16,24 @@ public class Order implements Identifiable {
     private Customer customer;
     private String status;
     private double total;
+    private String paymentMethod;
     private Delivery delivery;
     private LocalDateTime datetime;
 
-    public Order(String id, Restaurant restaurant, List<Item> items, List<Promo> promos, Customer customer, double total, Delivery delivery, LocalDateTime datetime, String status) {
+    public Order(String id, Restaurant restaurant, List<Item> items, List<Promo> promos, Customer customer, double total, String paymentMethod, Delivery delivery, LocalDateTime datetime, String status) {
         this.id = id;
         this.restaurant = restaurant;
         this.items = items;
         this.promos = promos;
         this.customer = customer;
         this.total = total;
+        this.paymentMethod = paymentMethod;
         this.delivery = delivery;
         this.datetime = datetime;
         this.status = status;
+    }
+    public Order(String id, Restaurant restaurant, List<Item> items, List<Promo> promos, Customer customer, double total, String paymentMethod, Delivery delivery, LocalDateTime datetime) {
+        this(id, restaurant, items, promos, customer, total, paymentMethod, delivery, datetime, "open");
     }
 
     public void confirmOrder() {
@@ -37,12 +43,27 @@ public class Order implements Identifiable {
         setStatus("canceled");
     }
 
+    public boolean isConfirmed() {
+        return status.equals("comfirmed");
+    }
+
     public void addItem(Item item) {
+        if (item==null) {
+            System.out.println(RED+"Item not found"+RESET);
+            return;
+        }
         double price = item.getPrice();
+        total += price;
         items.add(item);
     }
     public void removeItem(Item item) {
-        items.remove(item);
+        if (item==null || !items.remove(item)) {
+            System.out.println(RED+"Item not found"+RESET);
+            return;
+        }
+
+        double price = item.getPrice();
+        total += price;
     }
 
     public void calculateTotal() {
@@ -108,6 +129,14 @@ public class Order implements Identifiable {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public Delivery getDelivery() {

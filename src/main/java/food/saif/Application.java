@@ -352,11 +352,12 @@ public class Application implements ApplicationData, Color {
         Customer customer = getCustomer(node.get("customer").asText());
         String status = node.get("status").asText();
         double total = node.get("total").asDouble();
+        String paymentMethod = node.get("paymentMethod").asText();
         String deliveryId = node.get("delivery").asText();
         Delivery delivery = getDelivery(deliveryId);
         LocalDateTime datetime = LocalDateTime.parse(node.get("datetime").asText());
 
-        return new Order(id, restaurant, items, promos, customer, total, delivery, datetime, status);
+        return new Order(id, restaurant, items, promos, customer, total, paymentMethod, delivery, datetime, status);
     }
     public Order getOrder(String id) {
         for (Identifiable order: ordersList) {
@@ -545,6 +546,7 @@ public class Application implements ApplicationData, Color {
             node.put("restaurant", (order.getRestaurant()==null?"":order.getRestaurant().getId()));
             node.put("customer", (order.getCustomer()==null?"":order.getCustomer().getId()));
             node.put("total", order.getTotal());
+            node.put("paymentMethod", order.getPaymentMethod());
             node.put("delivery", order.getDelivery().getId());
             node.put("address", order.getDelivery().getLocation());
             node.put("datetime", String.valueOf(order.getDatetime()));

@@ -4,7 +4,6 @@ import food.mahmoud.Menu;
 import food.roba.Item;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -165,7 +164,7 @@ public class AdminPanel implements ApplicationData {
 
     public static void restaurantSearchPage(boolean oneTime) {
         waitFor(1);
-        System.out.println("\n# Manage Restaurants Page");
+        System.out.println("\n# Restaurants Search Page");
         System.out.println("1. Search by id");
         System.out.println("2. Search by name");
         System.out.println("3. Search by description");

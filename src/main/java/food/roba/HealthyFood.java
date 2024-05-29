@@ -1,16 +1,5 @@
 package food.roba;
 
-/*
-@Saif, May 26th 2024
-Feedback:
-1- some spelling mistakes in data fields and didn't follow naming conventions.
-2- zero-constructor was defined which is useless.
-3- 'setVegan' and 'setGlutenFree' methods had a logical error as they used '=' to check if value is true, which is incorrect
-    because the expression 'value=true' will assign value to true and will always return true.
-4- 'setVegan' and 'setGlutenFree' methods didn't have an else statement to demonstrate that the input value is invalid.
-5- 'setVegan' and 'setGlutenFree' methods have another logical error as they don't allow a healthy food to be not vegan or not gluten-free.
-6- 'setVegan' and 'setGlutenFree' weren't used in constructor to ensure that the input value is valid.
-*/
 public class HealthyFood extends Food implements isOrganic {
     //private String description; -> moved to Item class.
     private String ingredients;
@@ -89,8 +78,6 @@ public class HealthyFood extends Food implements isOrganic {
 
     @Override
     public String toString() {
-        //return "HealthyFood{" +super.toString()+ "description=" + description + ", calories=" + calories + ", isVegan=" + isVegan + ", isGlutenFree=" + isGlutenFree + ", ingredients=" + ingredients + '}';
-        // this is better:
         return super.toString()+"\nHealthyFood{" + "description=" + description + ", calories=" + calories + ", isVegan=" + isVegan + ", isGlutenFree=" + isGlutenFree + ", ingredients=" + ingredients + '}';
     }
 }

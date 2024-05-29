@@ -5,9 +5,22 @@
     "restaurant" : "REST1",
     "customer" : "CUST4",
     "total" : 21.950000000000003,
+    "paymentMethod": "cash",
     "delivery" : "DELV1",
     "address" : "Amman, Jordan",
     "datetime" : "2024-05-29T08:07:56.870094100",
+    "status" : "confirmed"
+  },
+  "ORDER2" : {
+    "items" : [ "ITEM1", "ITEM1", "ITEM2", "ITEM2", "ITEM2", "ITEM2", "ITEM6" ],
+    "promos" : [ "SAVE20", "SUMMER15" ],
+    "restaurant" : "REST2",
+    "customer" : "CUST4",
+    "total" : 21.15,
+    "paymentMethod": "cash",
+    "delivery" : "DELV2",
+    "address" : "Amman, Jordan",
+    "datetime" : "2024-05-29T08:33:25.339025300",
     "status" : "confirmed"
   }
 }

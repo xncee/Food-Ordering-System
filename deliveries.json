@@ -5,5 +5,12 @@
     "driver" : "DRIVER1",
     "status" : "not delivered",
     "distance" : 9.0
+  },
+  "DELV2" : {
+    "location" : "Amman, Jordan",
+    "order" : "ORDER2",
+    "driver" : "DRIVER1",
+    "status" : "not delivered",
+    "distance" : 5.0
   }
 }

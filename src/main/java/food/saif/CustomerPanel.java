@@ -231,8 +231,8 @@ public class CustomerPanel implements ApplicationData, Color {
                     System.out.println("\tRestaurant: "+order.getRestaurant().getName());
                     System.out.println("\tDate: "+order.getDatetime());
                     System.out.println("\tStatus: "+order.getStatus());
-                    System.out.println("\tTotal: "+order.getTotal());
-                    //System.out.println(order);
+                    System.out.println("\tTotal: $"+order.getTotal());
+                    System.out.println("\tPayment method: $"+order.getPaymentMethod());
                 }
                 if (orders.isEmpty())
                     System.out.println(RED+"No orders."+RESET);
@@ -254,7 +254,7 @@ public class CustomerPanel implements ApplicationData, Color {
         waitFor(1);
         System.out.println("\n# New Order Page");
 
-        Restaurant restaurant = null;
+        Restaurant restaurant;
 
         while (true) {
             System.out.println("\nEnter restaurantId (enter # to search or = to quit): ");
@@ -378,20 +378,53 @@ public class CustomerPanel implements ApplicationData, Color {
         System.out.println("\t=$"+(total+=(deliveryFee-total*discount)));
         // delivery fee is added to total and discount is applied.
         System.out.println("Delivery address: "+address);
+        System.out.println("# Payment Method");
+        System.out.println("1. Cash");
+        System.out.println("2. Balance");
+        //System.out.println("3. Credit card");
+
+        String paymentMethod = "";
+        int p = getUserInput(new int[] {1, 2});
+        switch (p) {
+            case 1: {
+                paymentMethod = "cash";
+                break;
+            }
+            case 2: {
+                paymentMethod = "balance";
+                break;
+            }
+            default:
+                paymentMethod = "";
+        }
+
+        Order order = new Order(orderId, restaurant, items, promos, customer, total, paymentMethod, delivery, dateTime);
         System.out.println("\nEnter to confirm (enter # to cancel): ");
         String con = input.nextLine();
         if (con.equals("#")) {
+            order.cancelOrder();
             System.out.println(YELLOW+"Order canceled."+RESET);
             return;
         }
-        Order order = new Order(orderId, restaurant, items, promos, customer, total, delivery, dateTime, "confirmed");
-        Application.add(delivery);
+
+        if (paymentMethod.equals("balance")) {
+            if (customer.deductBalance(total)) {
+                System.out.println(GREEN + "Order paid." + RESET);
+                order.confirmOrder();
+            }
+            else
+                System.out.println(RED+"Insufficient balance."+RESET);
+        }
+        else if (paymentMethod.equals("cash"))
+            order.cancelOrder();
+
         Application.add(order);
+        if (!order.isConfirmed()) return;
 
+        Application.add(delivery);
         System.out.println(GREEN+"Order confirmed."+RESET);
-
-        System.out.println("\n# Delivery Details");
-        System.out.println("Driver: ");
+        //System.out.println("\n# Delivery Details");
+        System.out.println("\nDriver: ");
         System.out.println("\tName: "+driver.getName());
         System.out.println("\tPhone number: "+driver.getPhoneNumber());
         System.out.println("\tApproximate delivery time: "+deliveryTime+" minutes");
@@ -444,7 +477,7 @@ public class CustomerPanel implements ApplicationData, Color {
 
         walletPage();
     }
-    // 1, 2
+
     public static int getUserInput(int[] choices) {
         int choice;
         try {

@@ -19,6 +19,16 @@ public class Customer extends User {
     public void addBalance(double amount) {
         balance += amount;
     }
+
+    private boolean checkSufficientBalance(double amount) {
+        return (balance>=amount);
+    }
+    public boolean deductBalance(double amount) {
+        if (!checkSufficientBalance(amount)) return false;
+
+        balance -= amount;
+        return true;
+    }
     public String getEmail() {
         return email;
     }
