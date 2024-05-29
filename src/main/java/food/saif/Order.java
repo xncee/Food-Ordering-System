@@ -44,7 +44,11 @@ public class Order implements Identifiable, Color {
     }
 
     public boolean isConfirmed() {
-        return status.equals("comfirmed");
+        return status.equals("confirmed");
+    }
+
+    public boolean isCanceled() {
+        return status.equals("canceled");
     }
 
     public void addItem(Item item) {

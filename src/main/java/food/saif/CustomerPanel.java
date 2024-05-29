@@ -244,8 +244,8 @@ public class CustomerPanel implements ApplicationData, Color {
         System.out.println("1. Display My Orders");
         System.out.println("2. Confirm Order");
         System.out.println("3. Cancel Order");
-        System.out.println("4. Review My Order");
-        int c = getUserInput(new int[] {1, 2, 3, 4});
+        System.out.println("4. Edit Order");
+        int c = getUserInput(new int[] {1, 2, 3});
         switch (c) {
             case 1: {
                 String customerId = customer.getId();
@@ -276,15 +276,36 @@ public class CustomerPanel implements ApplicationData, Color {
                     System.out.println(RED+"This order is already confirmed."+RESET);
                     break;
                 }
-                if (order.getPaymentMethod().equals("cash")) {
+                if (order.getPaymentMethod().equals("cash"))
                     order.confirmOrder();
-                    System.out.println(GREEN+"Order cofirmed."+RESET);
+                else if (order.getPaymentMethod().equals("balance")) {
+                    if (customer.deductBalance(order.getTotal()))
+                        order.confirmOrder();
+                    else
+                        System.out.println(RED+"Insufficient balance."+RESET);
                 }
 
+                if (order.isConfirmed())
+                    System.out.println(GREEN+"Order cofirmed."+RESET);
 
                 break;
             }
             case 3: {
+                String orderId = input.nextLine();
+                List<Order> orders = Search.findOrder("id", orderId);
+                if (orders.isEmpty()) {
+                    System.out.println(RED+"Order not found."+RESET);
+                    break;
+                }
+
+                Order order = orders.get(0);
+
+                if (order.isCanceled()) {
+                    System.out.println(RED+"This order is already canceled."+RESET);
+                    break;
+                }
+                order.cancelOrder();
+                System.out.println(YELLOW+"Order canceled."+RESET);
                 break;
             }
             case 4: {
