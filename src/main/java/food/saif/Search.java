@@ -50,7 +50,7 @@ public class Search implements ApplicationData {
             };
 
             //if (s==null) break;
-            //s = s.toLowerCase();
+            s = s.toLowerCase();
             searchQuery = searchQuery.toLowerCase();
 
             if (s.equals(searchQuery)) {

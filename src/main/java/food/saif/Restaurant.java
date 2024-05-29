@@ -36,24 +36,41 @@ public class Restaurant extends User {
 
         return (sum/reviews.size());
     }
+
+    public void displayRestaurant() {
+        System.out.println("\nID: "+getId());
+        System.out.println("\tRestaurant name: "+getName());
+        System.out.println("\tDescription: "+description);
+        System.out.println("\tLocation: "+location);
+        System.out.println("\tRating: "+getRating()+"/5.0"+" ("+reviews.size()+")");
+    }
+    public static void displayRestaurants() {
+        for (Identifiable r: restaurantsList) {
+            Restaurant restaurant = (Restaurant) r;
+            System.out.println();
+            restaurant.displayRestaurant();
+        }
+    }
+
     public void displayMenu() {
         int x = 1;
+        System.out.println();
         for (Item i: menu.getItems()) {
             Food foodItem = (Food) i;
             System.out.println(
                     (x++) + ". " +
                     foodItem.getName() + "\n\t"+
-                    foodItem.getDescription()
+                    "Description: "+foodItem.getDescription()
             );
             if (foodItem.isHealthy()) {
                 System.out.println("\t"+"Ingredients: "+((HealthyFood) foodItem).getIngredients());
                 System.out.println("\t"+"Calories: "+((HealthyFood) foodItem).getCalories());
-                System.out.print(", isVegan: "+((HealthyFood) foodItem).isVegan());
-                System.out.println(", isGlutenFree: "+((HealthyFood) foodItem).isGlutenFree());
-                System.out.print("\n\t"+", isOrganic: "+((HealthyFood) foodItem).isOrganic());
-                System.out.println(", isOrganicCertified: "+((HealthyFood) foodItem).organicCertificateAgent());
+                System.out.print("\tIsVegan: "+((HealthyFood) foodItem).isVegan());
+                System.out.print(", isGlutenFree: "+((HealthyFood) foodItem).isGlutenFree());
+                System.out.print("\n\tisOrganic: "+((HealthyFood) foodItem).isOrganic());
+                System.out.print(", isOrganicCertified: "+((HealthyFood) foodItem).organicCertificateAgent() + "\n");
             }
-            System.out.println("\n\t"+"$"+foodItem.getPrice());
+            System.out.println("\t"+"$"+foodItem.getPrice());
         }
     }
 

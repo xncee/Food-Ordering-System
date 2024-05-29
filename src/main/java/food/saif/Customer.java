@@ -16,6 +16,9 @@ public class Customer extends User {
         this.date = date;
     }
 
+    public void addBalance(double amount) {
+        balance += amount;
+    }
     public String getEmail() {
         return email;
     }
@@ -51,7 +54,10 @@ public class Customer extends User {
     @Override
     public String toString() {
         return super.toString()+"\nCustomer{" +
-                "balance=$" + balance +
+                "email=" + email +
+                ", address=" + address +
+                ", balance=$" + balance +
+                ", registrationDate=" + date +
                 "}";
     }
 }

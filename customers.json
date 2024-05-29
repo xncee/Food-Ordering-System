@@ -24,27 +24,11 @@
     "date" : "2024-05-29"
   },
   "CUST4" : {
-    "name" : "dsfsdf",
-    "email" : "dsfsdf@gfdg.com",
-    "phoneNumber" : "345345345",
-    "address" : "fgdgdg",
-    "balance" : 0.0,
-    "date" : "2024-05-29"
-  },
-  "CUST5" : {
-    "name" : "Saif",
+    "name" : "saifffo\\",
     "email" : "saif@gmail.com",
-    "phoneNumber" : "4325435345",
-    "address" : "Amman",
-    "balance" : 0.0,
-    "date" : "2024-05-29"
-  },
-  "CUST6" : {
-    "name" : "saif",
-    "email" : "fsdfsfd@gfds.fdg",
-    "phoneNumber" : "4325345435",
-    "address" : "dsfsdds",
-    "balance" : 0.0,
+    "phoneNumber" : "+962796076122",
+    "address" : "Amman, Jordan",
+    "balance" : 140.0,
     "date" : "2024-05-29"
   }
 }

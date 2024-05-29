@@ -3,7 +3,7 @@ package food.saif;
 public class Review implements Identifiable {
     private String id;
     private String customer;
-    private int rating; // ★ ★ ★ ★ ★
+    private int rating;
     private String comment;
 
     public Review(String id, String customer, int rating, String comment) {
@@ -13,7 +13,6 @@ public class Review implements Identifiable {
         this.comment = comment;
     }
 
-    // getNewId()
     public String getId() {
         return id;
     }
@@ -24,10 +23,6 @@ public class Review implements Identifiable {
 
     public String getCustomer() {
         return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
     }
 
     public int getRating() {
@@ -43,10 +38,6 @@ public class Review implements Identifiable {
 
     public String getComment() {
         return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     @Override

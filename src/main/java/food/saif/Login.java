@@ -36,7 +36,7 @@ public class Login implements ApplicationData, Color {
     }
 
     private void updateUser() {
-        if (customersJson.get(id)==null) return;
+        //if (usersJson.get(id)==null) return;
 
         usersJson.put(
                 username,
@@ -47,7 +47,7 @@ public class Login implements ApplicationData, Color {
                         .put("email", email)
                         .put("phoneNumber", phoneNumber)
         );
-        System.out.println(usersJson.toPrettyString());
+        //System.out.println(usersJson.toPrettyString());
         Application.updateUsers();
     }
 

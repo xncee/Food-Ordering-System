@@ -9,16 +9,18 @@ import java.util.List;
 
 public class Order implements Identifiable {
     private String id;
+    private Restaurant restaurant;
     private List<Item> items;
     private List<Promo> promos;
     private Customer customer;
     private String status;
     private double total;
-    private Delivery delivery; // c
+    private Delivery delivery;
     private LocalDateTime datetime;
 
-    public Order(String id, List<Item> items, List<Promo> promos, Customer customer, double total, Delivery delivery, LocalDateTime datetime, String status) {
+    public Order(String id, Restaurant restaurant, List<Item> items, List<Promo> promos, Customer customer, double total, Delivery delivery, LocalDateTime datetime, String status) {
         this.id = id;
+        this.restaurant = restaurant;
         this.items = items;
         this.promos = promos;
         this.customer = customer;
@@ -58,6 +60,14 @@ public class Order implements Identifiable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     public void setItems(List<Item> items) {

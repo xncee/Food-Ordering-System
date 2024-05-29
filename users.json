@@ -22,5 +22,12 @@
     "password" : "76867676",
     "email" : "gyu@gmail.com",
     "phoneNumber" : "67868"
+  },
+  "xncee" : {
+    "id" : "CUST4",
+    "username" : "xncee",
+    "password" : "12345678",
+    "email" : "saif@gmail.com",
+    "phoneNumber" : "+962796076122"
   }
 }

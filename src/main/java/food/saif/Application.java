@@ -86,6 +86,7 @@ public class Application implements ApplicationData, Color {
         // ((Customer) customersList.get(0)).
         String str;
         if (!list.isEmpty()) {
+            //System.out.println(list.get(list.size() - 1).getId());
             str = list.get(list.size() - 1).getId().split(prefix)[1];
         }
         else
@@ -119,7 +120,6 @@ public class Application implements ApplicationData, Color {
 
     public Delivery getDelivery(JsonNode node, String id) {
         if (node==null) return null;
-        String deliveryId = node.get("id").asText();
         String location = node.get("location").asText();
         String order = node.get("order").asText();
         String driverId = node.get("driver").asText();
@@ -127,7 +127,7 @@ public class Application implements ApplicationData, Color {
         String status = node.get("status").asText();
         double distance = node.get("distance").asDouble();
 
-        return new Delivery(deliveryId, location, order, driver, status, distance);
+        return new Delivery(id, location, order, driver, status, distance);
     }
     public Delivery getDelivery(String id) {
         for (Identifiable delivery: deliveriesList) {
@@ -334,6 +334,10 @@ public class Application implements ApplicationData, Color {
 
     public Order getOrder(JsonNode node, String id) {
         if (node==null) return null;
+        String restaurantId = node.get("restaurant").asText();
+        Restaurant restaurant = getRestaurant(restaurantId);
+        if (restaurant==null) return null;
+
         List<Item> items = new ArrayList<>();
         for (JsonNode jsonNode: node.get("items")) {
             items.add(getItem(jsonNode.asText()));
@@ -352,7 +356,7 @@ public class Application implements ApplicationData, Color {
         Delivery delivery = getDelivery(deliveryId);
         LocalDateTime datetime = LocalDateTime.parse(node.get("datetime").asText());
 
-        return new Order(id, items, promos, customer, total, delivery, datetime, status);
+        return new Order(id, restaurant, items, promos, customer, total, delivery, datetime, status);
     }
     public Order getOrder(String id) {
         for (Identifiable order: ordersList) {
@@ -538,6 +542,7 @@ public class Application implements ApplicationData, Color {
             ObjectNode node = new ObjectMapper().createObjectNode();
             node.putArray("items").addAll(itemsArray);
             node.putArray("promos").addAll(promosArray);
+            node.put("restaurant", (order.getRestaurant()==null?"":order.getRestaurant().getId()));
             node.put("customer", (order.getCustomer()==null?"":order.getCustomer().getId()));
             node.put("total", order.getTotal());
             node.put("delivery", order.getDelivery().getId());

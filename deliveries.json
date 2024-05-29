@@ -1,1 +1,9 @@
-{ }
+{
+  "DELV1" : {
+    "location" : "Amman, Jordan",
+    "order" : "ORDER1",
+    "driver" : "DRIVER1",
+    "status" : "not delivered",
+    "distance" : 9.0
+  }
+}

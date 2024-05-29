@@ -19,6 +19,10 @@ public class Promo implements ApplicationData, Color {
 
     public static Promo validateCode(String code) {
         Promo promo = Search.findPromo("code", code);
+        if (promo==null) {
+            System.out.println(RED+"Invalid code."+RESET);
+            return null;
+        }
         if (promo.expirationDate.isBefore(LocalDate.now())) {
             System.out.println(RED+"Promo code is expired."+RESET);
             return null;

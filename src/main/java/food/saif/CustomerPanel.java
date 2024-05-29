@@ -7,9 +7,7 @@ import food.roba.Item;
 import food.saif.design.Color;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CustomerPanel implements ApplicationData, Color {
     static Scanner input = new Scanner(System.in);
@@ -111,6 +109,7 @@ public class CustomerPanel implements ApplicationData, Color {
             System.out.println(GREEN+"You have been successfully logged in."+RESET);
             String customerId = login.getId();
             customer = application.getCustomer(customerId);
+            waitFor(1);
         }
         else loginPage();
     }
@@ -118,11 +117,11 @@ public class CustomerPanel implements ApplicationData, Color {
     public static void accountPage() {
         waitFor(1);
         System.out.println("\n# Account Page");
-        System.out.println("1) Profile");
-        System.out.println("2) Change password");
-        System.out.println("3) Wallet");
+        System.out.println("1. Profile");
+        System.out.println("2. Change password");
+        System.out.println("3. Wallet");
         System.out.println("99) <<");
-        System.out.print("=> ");
+
         int c = getUserInput(new int[] {1, 2, 3, 99});
 
         switch (c) {
@@ -171,7 +170,11 @@ public class CustomerPanel implements ApplicationData, Color {
                 String restaurantName = input.nextLine();
                 List<Restaurant> restaurants = Search.findRestaurant("name", restaurantName);
                 for (Restaurant restaurant: restaurants) {
-                    System.out.println(restaurant);
+                    restaurant.displayRestaurant();
+                }
+                if (restaurants.isEmpty()) {
+                    System.out.println(RED + "No Results." + RESET);
+                    restaurantSearchPage(oneTime);
                 }
                 break;
             }
@@ -180,7 +183,11 @@ public class CustomerPanel implements ApplicationData, Color {
                 String description = input.nextLine();
                 List<Restaurant> restaurants = Search.findRestaurant("description", description);
                 for (Restaurant restaurant: restaurants) {
-                    System.out.println(restaurant);
+                    restaurant.displayRestaurant();
+                }
+                if (restaurants.isEmpty()) {
+                    System.out.println(RED + "No Results." + RESET);
+                    restaurantSearchPage(oneTime);
                 }
                 break;
             }
@@ -189,7 +196,11 @@ public class CustomerPanel implements ApplicationData, Color {
                 String location = input.nextLine();
                 List<Restaurant> restaurants = Search.findRestaurant("location", location);
                 for (Restaurant restaurant: restaurants) {
-                    System.out.println(restaurant);
+                    restaurant.displayRestaurant();
+                }
+                if (restaurants.isEmpty()) {
+                    System.out.println(RED + "No Results." + RESET);
+                    restaurantSearchPage(oneTime);
                 }
                 break;
             }
@@ -201,30 +212,31 @@ public class CustomerPanel implements ApplicationData, Color {
     public static void orderPage() {
         waitFor(1);
         System.out.println("\n# Order Page");
-        System.out.println("1) Display restaurants");
-        System.out.println("2) My Orders");
-        System.out.println("3) New Order");
-        System.out.println("99) <<");
-        int c = getUserInput(new int[] {1, 2, 99});
+        System.out.println("1. Display restaurants");
+        System.out.println("2. My Orders");
+        System.out.println("3. New Order");
+        System.out.println("99. <<");
+        int c = getUserInput(new int[] {1, 2, 3, 99});
+
         switch (c) {
             case 1: {
-                for (Identifiable restaurant: restaurantsList) {
-                    System.out.println(restaurant);
-                }
+                Restaurant.displayRestaurants();
                 break;
             }
             case 2: {
                 String customerId = customer.getId();
                 List<Order> orders = Search.findOrder("customerId", customerId);
                 for (Order order: orders) {
-                    System.out.println(order); // change the design
+                    System.out.println("ID: "+order.getId());
+                    System.out.println("\tRestaurant: "+order.getRestaurant().getName());
+                    System.out.println("\tDate: "+order.getDatetime());
+                    System.out.println("\tStatus: "+order.getStatus());
+                    System.out.println("\tTotal: "+order.getTotal());
+                    //System.out.println(order);
                 }
-                /*
-                date:
-                items names:
-                total:
-                address:
-                 */
+                if (orders.isEmpty())
+                    System.out.println(RED+"No orders."+RESET);
+
                 break;
             }
             case 3: {
@@ -243,10 +255,17 @@ public class CustomerPanel implements ApplicationData, Color {
         System.out.println("\n# New Order Page");
 
         Restaurant restaurant = null;
-        restaurantSearchPage();
+
         while (true) {
-            System.out.println("Enter restaurantId: ");
+            System.out.println("\nEnter restaurantId (enter # to search or = to quit): ");
             String restaurantId = input.nextLine();
+            if (restaurantId.equals("#")) {
+                restaurantSearchPage(true);
+                continue;
+            }
+            else if (restaurantId.equals("=")) {
+                return;
+            }
             List<Restaurant> restaurants = Search.findRestaurant("id", restaurantId);
             if (!restaurants.isEmpty()) {
                 restaurant = restaurants.get(0);
@@ -257,12 +276,12 @@ public class CustomerPanel implements ApplicationData, Color {
         }
         if (restaurant==null) return;
 
-        System.out.println("# "+restaurant.getName());
+        System.out.println("\n# "+restaurant.getName());
         System.out.println("Description: "+restaurant.getDescription());
-        System.out.println("Rating: "+restaurant.getRating() + "("+restaurant.getOrdersCount()+")");
+        System.out.println("Rating: "+restaurant.getRating() + " ("+restaurant.getOrdersCount()+")");
         System.out.println("Location: "+restaurant.getLocation());
         System.out.println();
-        System.out.println("Enter to display menu: ");
+        System.out.print("Enter to display menu: ");
         input.nextLine();
 
         Menu menu = restaurant.getMenu();
@@ -276,9 +295,9 @@ public class CustomerPanel implements ApplicationData, Color {
 
         double total = 0;
         List<Item> items = new ArrayList<>();
-        System.out.println("\nSelect items (enter -1 to finish):");
+        HashMap<Item, Integer> itemsMap = new HashMap<>();
         while (true) {
-            System.out.println("Item number: ");
+            System.out.println("Item number (enter -1 to finsh): ");
             int itemNo = input.nextInt(); input.nextLine();
             if (itemNo==-1) break;
             Item item = menuItems.get(itemNo-1);
@@ -294,6 +313,8 @@ public class CustomerPanel implements ApplicationData, Color {
             for (int i=0; i<quantity; i++) {
                 items.add(item);
             }
+            if (itemsMap.containsKey(item)) itemsMap.put(item, itemsMap.get(item)+quantity);
+            else itemsMap.put(item, quantity);
         }
         if (items.isEmpty()) {
             System.out.println(RED+"No items were added."+RESET);
@@ -326,44 +347,44 @@ public class CustomerPanel implements ApplicationData, Color {
         if (address.isEmpty())
             address = customer.getAddress();
 
-        String deliveryId = Application.getNewId("DELV", ordersList); // yes ordersList
+        String deliveryId = Application.getNewId("DELV", deliveriesList); // yes ordersList
         if (driversList.isEmpty()) {
             System.out.println(RED+"No available drivers."+WHITE);
             return;
         }
         Driver driver = (Driver) driversList.get((int) getRandomNumber(0, driversList.size()));
-        double distance = (int) (getRandomNumber(5, 20));
+        double distance = (int) (getRandomNumber(1, 10));
 
         Delivery delivery = new Delivery(deliveryId, address, orderId, driver, "not delivered", distance);
-        double deliveryFee = delivery.calculateDeliveryFee();
+        double deliveryFee = Math.ceil(delivery.calculateDeliveryFee());
         int deliveryTime = delivery.calculateDeliveryTime();
         LocalDateTime dateTime = LocalDateTime.now();
 
         System.out.println("\n# Order Overview");
         System.out.println("Restaurant: "+restaurant.getName());
         System.out.println("Items: ");
-        for (Item item: items) {
-            int quantity = 0;
-            for (Item i: items) {
-                if (i.equals(item))
-                    quantity++;
-            }
-            System.out.println("\t$"+item.getPrice()*quantity+" - "+item.getName()+"*"+quantity);
+
+        for (Item item: itemsMap.keySet()) {
+            int quantity = itemsMap.get(item);
+            System.out.println("\t$"+item.getPrice()*quantity+"  "+quantity+"*"+item.getName());
         }
+
+        total = Math.round(total);
+
         System.out.println("Total: ");
-        System.out.println("\t+$"+total);
-        System.out.println("\t+$"+deliveryFee+" (items)");
-        System.out.println("\t-$"+(total*discount)+" ("+discount*100+"% discount)");
-        System.out.println("\t=$"+(total+=(deliveryFee-total*discount))+" (delivery fee)");
+        System.out.println("\t+$"+total+" (items)");
+        System.out.println("\t+$"+deliveryFee+" (delivery fee)");
+        System.out.println("\t"+YELLOW+"-$"+(total*discount)+" ("+discount*100+"% discount)"+RESET);
+        System.out.println("\t=$"+(total+=(deliveryFee-total*discount)));
         // delivery fee is added to total and discount is applied.
         System.out.println("Delivery address: "+address);
         System.out.println("\nEnter to confirm (enter # to cancel): ");
         String con = input.nextLine();
         if (con.equals("#")) {
-            System.out.println("\nOrder canceled.");
+            System.out.println(YELLOW+"Order canceled."+RESET);
             return;
         }
-        Order order = new Order(orderId, items, promos, customer, total, delivery, dateTime, "confirmed");
+        Order order = new Order(orderId, restaurant, items, promos, customer, total, delivery, dateTime, "confirmed");
         Application.add(delivery);
         Application.add(order);
 
@@ -371,33 +392,57 @@ public class CustomerPanel implements ApplicationData, Color {
 
         System.out.println("\n# Delivery Details");
         System.out.println("Driver: ");
-        System.out.println("\t"+driver.getName());
-        System.out.println("\t"+driver.getPhoneNumber());
-        System.out.println("Approximate delivery time: "+deliveryTime);
+        System.out.println("\tName: "+driver.getName());
+        System.out.println("\tPhone number: "+driver.getPhoneNumber());
+        System.out.println("\tApproximate delivery time: "+deliveryTime+" minutes");
 
     }
     public static void walletPage() {
         waitFor(1);
         System.out.println("\n# Wallet Page");
-        System.out.println("** Balance: $"+customer.getBalance());
-        System.out.println("1) Add balance");
-        System.out.println("2) Add credit card");
-        System.out.println("99) <<");
-        int choice = getUserInput(new int[] {1, 2, 99});
-        if (choice==1) {
-            System.out.println("Enter amount: ");
-            double amount = input.nextInt(); input.nextLine();
-            System.out.println("# Select payment method");
-            System.out.println("1) Credit card");
-            System.out.println("2) Cash");
-            //customer.addBalance(amount);
+        System.out.println("1. Display balance");
+        System.out.println("2. Add balance");
+        //System.out.println("3. Add credit card");
+        System.out.println("99. <<");
+        int c = getUserInput(new int[] {1, 2, 99});
+
+        switch (c) {
+            case 1: {
+                System.out.println(PURPLE+"Balance: $"+customer.getBalance()+RESET);
+                break;
+            }
+            case 2: {
+                while (true) {
+                    System.out.println("Enter amount: ");
+                    try {
+                        double amount = input.nextInt();
+                        input.nextLine();
+                        customer.addBalance(amount);
+                        break;
+                    }
+                    catch (InputMismatchException e) {
+                        System.out.println(RED+"Invalid input. try again."+RESET);
+                    }
+                }
+                Application.updateCustomers();
+                System.out.println(GREEN+"Balance added."+RESET);
+                //System.out.println("# Select payment method");
+                //System.out.println("1) Credit card");
+                //System.out.println("2) Cash");
+                //customer.addBalance(amount);
+                break;
+            }
+            case 3: {
+                //addCreditCardPage();
+                break;
+            }
+            case 99: {
+                accountPage();
+                break;
+            }
         }
-        else if (choice==2) {
-            // add payment method
-        }
-        else if (choice==99) {
-            accountPage();
-        }
+
+        walletPage();
     }
     // 1, 2
     public static int getUserInput(int[] choices) {

@@ -1,22 +1,13 @@
 {
   "ORDER1" : {
-    "items" : [ "ITEM1", "ITEM2" ],
-    "promos" : [ "s50" ],
-    "customer" : "CUSTOMER1",
-    "total" : 400.0,
-    "delivery": "DELV1",
+    "items" : [ "ITEM21", "ITEM21", "ITEM21", "ITEM22", "ITEM22" ],
+    "promos" : [ ],
+    "restaurant" : "REST1",
+    "customer" : "CUST4",
+    "total" : 21.950000000000003,
+    "delivery" : "DELV1",
     "address" : "Amman, Jordan",
-    "datetime" : "2024-04-29T03:02:32.599889400",
+    "datetime" : "2024-05-29T08:07:56.870094100",
     "status" : "confirmed"
-  },
-  "ORDER2" : {
-    "items" : [ "ITEM1", "ITEM1", "ITEM3" ],
-    "promos" : [  ],
-    "customer" : "CUSTOMER1",
-    "total" : 400.0,
-    "delivery": "DELV2",
-    "address" : "Amman, Jordan",
-    "datetime" : "2024-04-29T03:02:32.599889400",
-    "status" : "open"
   }
 }
