@@ -213,7 +213,7 @@ public class CustomerPanel implements ApplicationData, Color {
         waitFor(1);
         System.out.println("\n# Order Page");
         System.out.println("1. Display restaurants");
-        System.out.println("2. My Orders");
+        System.out.println("2. Manage My Orders");
         System.out.println("3. New Order");
         System.out.println("99. <<");
         int c = getUserInput(new int[] {1, 2, 3, 99});
@@ -224,19 +224,7 @@ public class CustomerPanel implements ApplicationData, Color {
                 break;
             }
             case 2: {
-                String customerId = customer.getId();
-                List<Order> orders = Search.findOrder("customerId", customerId);
-                for (Order order: orders) {
-                    System.out.println("ID: "+order.getId());
-                    System.out.println("\tRestaurant: "+order.getRestaurant().getName());
-                    System.out.println("\tDate: "+order.getDatetime());
-                    System.out.println("\tStatus: "+order.getStatus());
-                    System.out.println("\tTotal: $"+order.getTotal());
-                    System.out.println("\tPayment method: $"+order.getPaymentMethod());
-                }
-                if (orders.isEmpty())
-                    System.out.println(RED+"No orders."+RESET);
-
+                manageOrdersPage();
                 break;
             }
             case 3: {
@@ -250,6 +238,61 @@ public class CustomerPanel implements ApplicationData, Color {
         orderPage();
     }
 
+    public static void manageOrdersPage() {
+        waitFor(1);
+        System.out.println("\n# Manage Orders Page");
+        System.out.println("1. Display My Orders");
+        System.out.println("2. Confirm Order");
+        System.out.println("3. Cancel Order");
+        System.out.println("4. Review My Order");
+        int c = getUserInput(new int[] {1, 2, 3, 4});
+        switch (c) {
+            case 1: {
+                String customerId = customer.getId();
+                List<Order> orders = Search.findOrder("customerId", customerId);
+                for (Order order: orders) {
+                    System.out.println("ID: "+order.getId());
+                    System.out.println("\tRestaurant: "+order.getRestaurant().getName());
+                    System.out.println("\tDate: "+order.getDatetime());
+                    System.out.println("\tStatus: "+order.getStatus());
+                    System.out.println("\tTotal: $"+order.getTotal());
+                    System.out.println("\tPayment method: $"+order.getPaymentMethod());
+                }
+                if (orders.isEmpty())
+                    System.out.println(RED+"No orders."+RESET);
+               break;
+            }
+            case 2: {
+                String orderId = input.nextLine();
+                List<Order> orders = Search.findOrder("id", orderId);
+                if (orders.isEmpty()) {
+                    System.out.println(RED+"Order not found."+RESET);
+                    break;
+                }
+
+                Order order = orders.get(0);
+
+                if (order.isConfirmed()) {
+                    System.out.println(RED+"This order is already confirmed."+RESET);
+                    break;
+                }
+                if (order.getPaymentMethod().equals("cash")) {
+                    order.confirmOrder();
+                    System.out.println(GREEN+"Order cofirmed."+RESET);
+                }
+
+
+                break;
+            }
+            case 3: {
+                break;
+            }
+            case 4: {
+                break;
+            }
+        }
+        manageOrdersPage();
+    }
     public static void newOrderPage() {
         waitFor(1);
         System.out.println("\n# New Order Page");
@@ -419,9 +462,9 @@ public class CustomerPanel implements ApplicationData, Color {
             order.cancelOrder();
 
         Application.add(order);
+        Application.add(delivery);
         if (!order.isConfirmed()) return;
 
-        Application.add(delivery);
         System.out.println(GREEN+"Order confirmed."+RESET);
         //System.out.println("\n# Delivery Details");
         System.out.println("\nDriver: ");
