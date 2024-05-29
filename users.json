@@ -1,24 +1,24 @@
 {
   "xnce" : {
-    "id" : "USER1",
+    "id" : "CUST1",
     "password" : "13243242",
     "email" : "xnce@gmail.com",
     "phoneNumber" : "+962796027099"
   },
   "roba" : {
-    "id" : "USER2",
+    "id" : "CUST2",
     "password" : "12345678#",
     "email" : "roba@gmail.com",
     "phoneNumber" : "+96279457867"
   },
   "moha" : {
-    "id" : "USER3",
+    "id" : "CUST3",
     "password" : "56565672",
     "email" : "yuyu@gmail.com",
     "phoneNumber" : "+962796757588"
   },
   "ahmad" : {
-    "id" : "USER4",
+    "id" : "CUST4",
     "password" : "76867676",
     "email" : "gyu@gmail.com",
     "phoneNumber" : "67868"

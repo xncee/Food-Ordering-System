@@ -42,26 +42,7 @@ public class Order implements Identifiable {
     public void removeItem(Item item) {
         items.remove(item);
     }
-//    public boolean addPromoCode(String code) {
-//        if (appliedPromoCodes.contains(code)) {
-//            System.out.println("This discount was already applied.");
-//            return false;
-//        }
-//        double percentage = usePromoCode(code);
-//        if (percentage!=-1) {
-//            double discount = total*percentage/100;
-//            if (discount<total) {
-//                totalDiscount += percentage;
-//                appliedPromoCodes.add(code);
-//
-//                System.out.println(percentage+"% discount was applied.");
-//                total-=discount;
-//                return true;
-//            }
-//        }
-//        System.out.println("This promo code is invalid.");
-//        return false;
-//    }
+
     public void calculateTotal() {
         double total = 0;
         for (Item item: items) {

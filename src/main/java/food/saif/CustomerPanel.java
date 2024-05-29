@@ -1,6 +1,5 @@
 package food.saif;
 
-import com.sun.source.tree.WhileLoopTree;
 import food.mahmoud.Menu;
 import food.noor.Delivery;
 import food.noor.Driver;
@@ -20,8 +19,7 @@ public class CustomerPanel implements ApplicationData, Color {
     static Customer customer;
 
     public static void main(String[] args) {
-        LocalDateTime datetime = LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-        System.out.println();
+        //LocalDateTime datetime = LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
 
         homePage();
 
@@ -64,7 +62,6 @@ public class CustomerPanel implements ApplicationData, Color {
         homePage();
     }
     public static void loginPage() {
-        waitFor(1);
         System.out.println("\n# Login page");
         System.out.println("1. Sign in");
         System.out.println("2. Sign up");
@@ -306,6 +303,7 @@ public class CustomerPanel implements ApplicationData, Color {
         }
 
         List<Promo> promos = new ArrayList<>();
+        double discount = 0;
         while (true) {
             System.out.println("Enter promo code (keep blank if not available): ");
             String promoCode = input.nextLine();
@@ -313,9 +311,14 @@ public class CustomerPanel implements ApplicationData, Color {
             if (promoCode.isEmpty()) break;
             Promo promo = Promo.validateCode(promoCode);
             if (promo==null) continue;
+            if (discount+promo.getDiscountPercentage()>1) {
+                System.out.println(YELLOW + "Promo code wasn't applied. You reached the maximum discount." + RESET);
+                break;
+            }
 
             promos.add(promo);
-            System.out.println(PURPLE+promo.getPercentage()*100+"% discount was applied."+RESET);
+            discount+=promo.getDiscountPercentage();
+            System.out.println(PURPLE+promo.getDiscountPercentage()*100+"% discount was applied."+RESET);
         }
         //if (order==null) newOrderPage();
         String orderId = Application.getNewId("ORDER", ordersList);
@@ -349,11 +352,13 @@ public class CustomerPanel implements ApplicationData, Color {
             System.out.println("\t$"+item.getPrice()*quantity+" - "+item.getName()+"*"+quantity);
         }
         System.out.println("Total: ");
-        System.out.println("\t$"+total);
-        System.out.println("\t$"+deliveryFee+" (items)");
-        System.out.println("\t=$"+(total+=deliveryFee)+" (delivery fee)"); // delivery fee is added to total
+        System.out.println("\t+$"+total);
+        System.out.println("\t+$"+deliveryFee+" (items)");
+        System.out.println("\t-$"+(total*discount)+" ("+discount*100+"% discount)");
+        System.out.println("\t=$"+(total+=(deliveryFee-total*discount))+" (delivery fee)");
+        // delivery fee is added to total and discount is applied.
         System.out.println("Delivery address: "+address);
-        System.out.println("Enter to confirm (enter # to cancel): ");
+        System.out.println("\nEnter to confirm (enter # to cancel): ");
         String con = input.nextLine();
         if (con.equals("#")) {
             System.out.println("\nOrder canceled.");

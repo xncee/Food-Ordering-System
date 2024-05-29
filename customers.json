@@ -1,10 +1,10 @@
 {
   "CUST1" : {
-    "customerName" : "saif alkhalili",
-    "email": "",
-    "phoneNumber" : "",
-    "address": "",
-    "balance" : 0,
+    "name" : "saif alkhalili",
+    "email": "xnce@gmail.com",
+    "phoneNumber" : "+962796027099",
+    "address": "Amman, Jordan",
+    "balance" : 50,
     "date": "2024-04-05"
   }
 }

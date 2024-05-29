@@ -6,14 +6,14 @@ public class Customer extends User {
     private String email;
     private String address;
     private double balance;
-    private LocalDate datetime;
+    private LocalDate date;
 
-    public Customer(String id, String name, String email, String phoneNumber, String address, double balance, LocalDate datetime) {
+    public Customer(String id, String name, String email, String phoneNumber, String address, double balance, LocalDate date) {
         super(id, name, phoneNumber);
         this.email = email;
         this.address = address;
         this.balance = balance;
-        this.datetime = datetime;
+        this.date = date;
     }
 
     public String getEmail() {
@@ -40,12 +40,12 @@ public class Customer extends User {
         this.balance = balance;
     }
 
-    public LocalDate getDatetime() {
-        return datetime;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDatetime(LocalDate datetime) {
-        this.datetime = datetime;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Override

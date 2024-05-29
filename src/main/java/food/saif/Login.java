@@ -28,8 +28,8 @@ public class Login implements ApplicationData, Color {
     private void addNewUser() {
         if (customersJson.get(id)==null) {
             updateUser(); // adding info to users.json file
-            LocalDate datetime = LocalDate.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a")));
-            Customer customer = new Customer(id, name, email, phoneNumber, address, 0.0, datetime);
+            LocalDate date = LocalDate.now();
+            Customer customer = new Customer(id, name, email, phoneNumber, address, 0.0, date);
             Application.add(customer);
             //Application.updateCustomers();
         }
@@ -85,8 +85,8 @@ public class Login implements ApplicationData, Color {
         // ensuring that it contains one '@':
         if (email.length()-email.replace("@", "").length()>1) return false;
         if (!email.split("@")[1].contains(".")) return false;
-        if (!email.split("@")[1].split("[.]")[0].isEmpty()) return false;
-        if (!email.split("@")[1].split("[.]")[1].isEmpty()) return false;
+        if (email.split("@")[1].split("[.]")[0].isEmpty()) return false;
+        if (email.split("@")[1].split("[.]")[1].isEmpty()) return false;
 
         return true;
     }
@@ -116,7 +116,7 @@ public class Login implements ApplicationData, Color {
             return false;
         }
 
-        this.id = Application.getNewId("USER", customersList);
+        this.id = Application.getNewId("CUST", customersList);
         this.username = username;
         this.password = password;
         this.name = name;

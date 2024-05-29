@@ -1,22 +1,19 @@
 package food.saif;
 
 import food.saif.design.Color;
-import food.saif.io.JsonFileWriter;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Promo implements ApplicationData, Color {
     private String code;
-    private double percentage; //0.xx
+    private double discountPercentage; //0.xx
     private LocalDate expirationDate;
 
     final static char[] CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
 
-    public Promo(String code, double percentage, LocalDate expirationDate) {
+    public Promo(String code, double discountPercentage, LocalDate expirationDate) {
         this.code = code;
-        this.percentage = percentage;
+        this.discountPercentage = discountPercentage;
         this.expirationDate = expirationDate;
     }
 
@@ -41,24 +38,24 @@ public class Promo implements ApplicationData, Color {
         return generateRandomCode(length);
     }
 //
-//    public static String addPromoCode(double percentage, LocalDate expirationDate, String code) {
+//    public static String addPromoCode(double discountPercentage, LocalDate expirationDate, String code) {
 //        //System.out.println(LocalDateTime.now().plusMonths(2).toLocalDate());
-//        if (percentage<0 || percentage>100) {
+//        if (discountPercentage<0 || discountPercentage>100) {
 //            throw new RuntimeException("Discount must be between 1 and 100.");
 //        }
-//        percentage = percentage/100;
+//        discountPercentage = discountPercentage/100;
 //
 //        promoCodes.put(
 //            code.toLowerCase(),
 //            JSWriter.getNewJsonNode()
-//                    .put("percentage", percentage)
+//                    .put("discountPercentage", discountPercentage)
 //                    .put("expirationDate", String.valueOf(expirationDate))
 //        );
 //        updatePromoCodes();
 //        return code;
 //    }
-//    public static String addPromoCode(double percentage, LocalDate expirationDate) {
-//        return addPromoCode(percentage, expirationDate, generateRandomCode(8));
+//    public static String addPromoCode(double discountPercentage, LocalDate expirationDate) {
+//        return addPromoCode(discountPercentage, expirationDate, generateRandomCode(8));
 //    }
 //    public static boolean removePromoCode(String code) {
 //        if (promoCodes.get(code)!=null) {
@@ -74,8 +71,8 @@ public class Promo implements ApplicationData, Color {
         return code;
     }
 
-    public double getPercentage() {
-        return percentage;
+    public double getDiscountPercentage() {
+        return discountPercentage;
     }
 
     public LocalDate getExpirationDate() {

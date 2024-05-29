@@ -2,9 +2,12 @@ package food.saif;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import food.mahmoud.Menu;
 import food.noor.Delivery;
 import food.noor.Driver;
+import food.roba.Food;
 import food.roba.HealthyFood;
 import food.roba.Item;
 import food.roba.JunkFood;
@@ -144,7 +147,7 @@ public class Application implements ApplicationData, Color {
     }
     public Customer getCustomer(JsonNode node, String id) {
         if (node==null) return null;
-        String name = node.get("customerName").asText();
+        String name = node.get("name").asText();
         String email = node.get("email").asText();
         String phoneNumber = node.get("phoneNumber").asText();
         String address = node.get("address").asText();
@@ -305,12 +308,12 @@ public class Application implements ApplicationData, Color {
         }
     }
 
-    public Promo getPromo(JsonNode node, String id) {
+    public Promo getPromo(JsonNode node, String code) {
         if (node==null) return null;
-        double percentage = node.get("percentage").asDouble();
+        double percentage = node.get("discountPercentage").asDouble();
         LocalDate expirationDate = LocalDate.parse(node.get("expirationDate").asText());
 
-        return new Promo(id, percentage, expirationDate);
+        return new Promo(code, percentage, expirationDate);
     }
     public Promo getPromo(String code) {
         for (Promo promo: promosList) {
@@ -369,6 +372,123 @@ public class Application implements ApplicationData, Color {
     public static void updateUsers() {
         usersFile.write();
     }
+
+    public static void updateCustomers() {
+        customersJson.removeAll();
+        for (Identifiable r: customersList) {
+            Customer customer = (Customer) r;
+            customersJson.put(
+                    customer.getId(),
+                    new ObjectMapper().createObjectNode()
+                            .put("name", customer.getName())
+                            .put("email", customer.getEmail())
+                            .put("phoneNumber", customer.getPhoneNumber())
+                            .put("address", customer.getAddress())
+                            .put("balance", customer.getBalance())
+                            .put("date", String.valueOf(customer.getDate()))
+            );
+        }
+        //System.out.println(customersJson.toPrettyString());
+        customersFile.write();
+    }
+
+    public static void updateDrivers() {
+        driversJson.removeAll();
+        for (Identifiable r: driversList) {
+            Driver driver = (Driver) r;
+            driversJson.put(
+                    driver.getId(),
+                    new ObjectMapper().createObjectNode()
+                            .put("name", driver.getName())
+                            .put("phoneNumber", driver.getPhoneNumber())
+            );
+        }
+        //System.out.println(driversJson.toPrettyString());
+        driversFile.write();
+    }
+
+    public static void updateDeliveries() {
+        deliveriesJson.removeAll();
+        for (Identifiable r: deliveriesList) {
+            Delivery delivery = (Delivery) r;
+            deliveriesJson.put(
+                    delivery.getId(),
+                    new ObjectMapper().createObjectNode()
+                            .put("location", delivery.getLocation())
+                            .put("order", delivery.getOrder())
+                            .put("driver", delivery.getDriver().getId())
+                            .put("status", delivery.getStatus())
+                            .put("distance", delivery.getDistance())
+            );
+        }
+        //System.out.println(deliveriesJson.toPrettyString());
+        deliveriesFile.write();
+    }
+
+    public static void updateItems() {
+        itemsJson.removeAll();
+        for (Identifiable r: itemsList) {
+            Item item = (Item) r;
+            itemsJson.put(
+                    item.getId(),
+                    new ObjectMapper().createObjectNode()
+                            .put("name", item.getName())
+                            .put("price", item.getPrice())
+                            .put("description", item.getDescription())
+                            .put("category", ((Food) item).getCategory())
+                            .put("isHealthy", ((Food) item).isHealthy())
+                            .put("isVegan", ((HealthyFood) item).isVegan())
+                            .put("isGlutenFree", ((HealthyFood) item).isGlutenFree())
+                            .put("isOrganic", ((HealthyFood) item).isOrganic())
+                            .put("ingredients", ((HealthyFood) item).getIngredients())
+                            .put("calories", ((HealthyFood) item).getCalories())
+            );
+        }
+        //System.out.println(itemsJson.toPrettyString());
+        itemsFile.write();
+    }
+
+    public static void updateMenus() {
+        menusJson.removeAll();
+        for (Identifiable r : menusList) {
+            Menu menu = (Menu) r;
+            String menuId = menu.getId();
+            ArrayNode itemsArray = new ObjectMapper().createArrayNode();
+            for (Item item : menu.getItems()) {
+                itemsArray.add(item.getId());
+            }
+            ObjectNode menuNode = new ObjectMapper().createObjectNode();
+            menuNode.put("restaurant", menu.getRestaurantId())
+                    .set("items", itemsArray);
+            menusJson.set(menuId, menuNode);
+        }
+
+        System.out.println(menusJson.toPrettyString());
+        menusFile.write();
+    }
+
+    public static void updateReviews() {
+        reviewsJson.removeAll();
+        for (List<Identifiable> rev : reviewsList) {
+            String reviewId = rev.get(0).getId();
+            ArrayNode reviewsArray = new ObjectMapper().createArrayNode();
+            for (Identifiable r: rev) {
+                Review review = (Review) r;
+                ObjectNode reviewNode = new ObjectMapper().createObjectNode();
+
+                reviewNode.put("customer", review.getCustomer().getId())
+                        .put("rating", review.getRating())
+                        .put("comment", review.getComment());
+
+                reviewsArray.add(reviewNode);
+            }
+            reviewsJson.putArray(reviewId).addAll(reviewsArray);
+        }
+
+        // System.out.println(reviewsJson.toPrettyString());
+        reviewsFile.write();
+    }
+
     public static void updateRestaurants() {
         restaurantsJson.removeAll();
         for (Identifiable r: restaurantsList) {
@@ -387,7 +507,60 @@ public class Application implements ApplicationData, Color {
         //System.out.println(restaurantsJson.toPrettyString());
         restaurantsFile.write();
     }
+
+    public static void updatePromos() {
+        promosJson.removeAll();
+        for (Promo promo: promosList) {
+            promosJson.put(
+                    promo.getCode(),
+                    new ObjectMapper().createObjectNode()
+                            .put("discountPercentage", promo.getDiscountPercentage())
+                            .put("expirationDate", String.valueOf(promo.getExpirationDate()))
+            );
+        }
+        //System.out.println(promosJson.toPrettyString());
+        promosFile.write();
+    }
+
+    public static void updateOrders() {
+        ordersJson.removeAll();
+        for (Identifiable o: ordersList) {
+            Order order = (Order) o;
+            ArrayNode itemsArray = new ObjectMapper().createArrayNode();
+            for (Item item : order.getItems()) {
+                itemsArray.add(item.getId());
+            }
+            ArrayNode promosArray = new ObjectMapper().createArrayNode();
+            for (Promo promo : order.getPromos()) {
+                promosArray.add(promo.getCode());
+            }
+            ObjectNode node = new ObjectMapper().createObjectNode();
+            node.putArray("items").addAll(itemsArray);
+            node.putArray("promos").addAll(promosArray);
+            node.put("customer", order.getCustomer().getId());
+            node.put("total", order.getTotal());
+            node.put("delivery", order.getDelivery().getId());
+            node.put("address", order.getDelivery().getLocation());
+            node.put("datetime", String.valueOf(order.getDatetime()));
+            node.put("status", order.getStatus());
+
+            ordersJson.set(order.getId(), node);
+        }
+
+        // System.out.println(ordersJson.toPrettyString());
+        ordersFile.write();
+    }
+
     public static void updateData() {
+        updateUsers();
+        updateCustomers();
+        updateDrivers();
+        updateDeliveries();
+        updateItems();
         updateRestaurants();
+        updateMenus();
+        updateReviews();
+        updatePromos();
+        updateOrders();
     }
 }
