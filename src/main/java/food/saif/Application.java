@@ -146,7 +146,6 @@ public class Application implements ApplicationData, Color {
         }
     }
     public Customer getCustomer(JsonNode node, String id) {
-        if (node==null) return null;
         String name = node.get("name").asText();
         String email = node.get("email").asText();
         String phoneNumber = node.get("phoneNumber").asText();
@@ -252,10 +251,10 @@ public class Application implements ApplicationData, Color {
         List<Identifiable> reviews = new ArrayList<>();
         for (JsonNode jsonNode: node) {
             String customerId = jsonNode.get("customer").asText();
-            Customer customer = getCustomer(customerId);
+            //System.out.println(customer+":"+customerId);
             int rating = jsonNode.get("rating").asInt();
             String comment = jsonNode.get("comment").asText();
-            reviews.add(new Review(id, customer, rating, comment));
+            reviews.add(new Review(id, customerId, rating, comment));
         }
 
         return reviews;
@@ -317,8 +316,9 @@ public class Application implements ApplicationData, Color {
     }
     public Promo getPromo(String code) {
         for (Promo promo: promosList) {
-            if (promo.getCode().equals(code))
-                return promo;
+            if (promo!=null)
+                if (promo.getCode().equals(code))
+                    return promo;
         }
 
         return null;
@@ -341,7 +341,9 @@ public class Application implements ApplicationData, Color {
 
         List<Promo> promos = new ArrayList<>();
         for (JsonNode jsonNode: node.get("promos")) {
-            promos.add(getPromo(jsonNode.asText()));
+            Promo promo = getPromo(jsonNode.asText());
+            if (promo!=null)
+                promos.add(promo);
         }
         Customer customer = getCustomer(node.get("customer").asText());
         String status = node.get("status").asText();
@@ -429,20 +431,18 @@ public class Application implements ApplicationData, Color {
         itemsJson.removeAll();
         for (Identifiable r: itemsList) {
             Item item = (Item) r;
-            itemsJson.put(
-                    item.getId(),
-                    new ObjectMapper().createObjectNode()
-                            .put("name", item.getName())
-                            .put("price", item.getPrice())
-                            .put("description", item.getDescription())
-                            .put("category", ((Food) item).getCategory())
-                            .put("isHealthy", ((Food) item).isHealthy())
-                            .put("isVegan", ((HealthyFood) item).isVegan())
-                            .put("isGlutenFree", ((HealthyFood) item).isGlutenFree())
-                            .put("isOrganic", ((HealthyFood) item).isOrganic())
-                            .put("ingredients", ((HealthyFood) item).getIngredients())
-                            .put("calories", ((HealthyFood) item).getCalories())
-            );
+            ObjectNode itemNode = new ObjectMapper().createObjectNode()
+                    .put("name", item.getName())
+                    .put("price", item.getPrice())
+                    .put("description", item.getDescription())
+                    .put("category", (item instanceof Food) ? ((Food) item).getCategory() : "")
+                    .put("isHealthy", (item instanceof HealthyFood))
+                    .put("isVegan", (item instanceof HealthyFood) ? ((HealthyFood) item).isVegan() : false)
+                    .put("isGlutenFree", (item instanceof HealthyFood) ? ((HealthyFood) item).isGlutenFree() : false)
+                    .put("isOrganic", (item instanceof HealthyFood) ? ((HealthyFood) item).isOrganic() : false)
+                    .put("ingredients", (item instanceof HealthyFood) ? ((HealthyFood) item).getIngredients() : "")
+                    .put("calories", (item instanceof HealthyFood) ? ((HealthyFood) item).getCalories() : 0);
+            itemsJson.put(item.getId(), itemNode);
         }
         //System.out.println(itemsJson.toPrettyString());
         itemsFile.write();
@@ -463,7 +463,7 @@ public class Application implements ApplicationData, Color {
             menusJson.set(menuId, menuNode);
         }
 
-        System.out.println(menusJson.toPrettyString());
+        //System.out.println(menusJson.toPrettyString());
         menusFile.write();
     }
 
@@ -475,14 +475,14 @@ public class Application implements ApplicationData, Color {
             for (Identifiable r: rev) {
                 Review review = (Review) r;
                 ObjectNode reviewNode = new ObjectMapper().createObjectNode();
-
-                reviewNode.put("customer", review.getCustomer().getId())
+                //System.out.println(review);
+                reviewNode.put("customer", review.getCustomer())
                         .put("rating", review.getRating())
                         .put("comment", review.getComment());
 
                 reviewsArray.add(reviewNode);
             }
-            reviewsJson.putArray(reviewId).addAll(reviewsArray);
+            reviewsJson.set(reviewId, reviewsArray);
         }
 
         // System.out.println(reviewsJson.toPrettyString());
@@ -514,8 +514,8 @@ public class Application implements ApplicationData, Color {
             promosJson.put(
                     promo.getCode(),
                     new ObjectMapper().createObjectNode()
-                            .put("discountPercentage", promo.getDiscountPercentage())
-                            .put("expirationDate", String.valueOf(promo.getExpirationDate()))
+                            .put("discountPercentage", (promo==null?0.0:promo.getDiscountPercentage()))
+                            .put("expirationDate", (promo==null?String.valueOf(LocalDate.now()):String.valueOf(promo.getExpirationDate())))
             );
         }
         //System.out.println(promosJson.toPrettyString());
@@ -532,12 +532,13 @@ public class Application implements ApplicationData, Color {
             }
             ArrayNode promosArray = new ObjectMapper().createArrayNode();
             for (Promo promo : order.getPromos()) {
-                promosArray.add(promo.getCode());
+                if (promo!=null)
+                    promosArray.add(promo.getCode());
             }
             ObjectNode node = new ObjectMapper().createObjectNode();
             node.putArray("items").addAll(itemsArray);
             node.putArray("promos").addAll(promosArray);
-            node.put("customer", order.getCustomer().getId());
+            node.put("customer", (order.getCustomer()==null?"":order.getCustomer().getId()));
             node.put("total", order.getTotal());
             node.put("delivery", order.getDelivery().getId());
             node.put("address", order.getDelivery().getLocation());

@@ -47,6 +47,7 @@ public class Login implements ApplicationData, Color {
                         .put("email", email)
                         .put("phoneNumber", phoneNumber)
         );
+        System.out.println(usersJson.toPrettyString());
         Application.updateUsers();
     }
 

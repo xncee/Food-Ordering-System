@@ -1,22 +1,22 @@
 {
-  "SAVE50": {
-    "discountPercentage": 0.50,
-    "expirationDate": "2024-05-28"
+  "SAVE50" : {
+    "discountPercentage" : 0.5,
+    "expirationDate" : "2024-05-28"
   },
-  "SAVE20": {
-    "discountPercentage": 0.20,
-    "expirationDate": "2025-05-29"
+  "SAVE20" : {
+    "discountPercentage" : 0.2,
+    "expirationDate" : "2025-05-29"
   },
-  "SPECIAL10": {
-    "discountPercentage": 0.10,
-    "expirationDate": "2024-06-30"
+  "SPECIAL10" : {
+    "discountPercentage" : 0.1,
+    "expirationDate" : "2024-06-30"
   },
-  "SUMMER15": {
-    "discountPercentage": 0.15,
-    "expirationDate": "2024-08-31"
+  "SUMMER15" : {
+    "discountPercentage" : 0.15,
+    "expirationDate" : "2024-08-31"
   },
-  "FESTIVE25": {
-    "discountPercentage": 0.25,
-    "expirationDate": "2024-12-31"
+  "FESTIVE25" : {
+    "discountPercentage" : 0.25,
+    "expirationDate" : "2024-12-31"
   }
 }

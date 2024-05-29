@@ -1,10 +1,50 @@
 {
   "CUST1" : {
     "name" : "saif alkhalili",
-    "email": "xnce@gmail.com",
+    "email" : "xnce@gmail.com",
     "phoneNumber" : "+962796027099",
-    "address": "Amman, Jordan",
-    "balance" : 50,
-    "date": "2024-04-05"
+    "address" : "Amman, Jordan",
+    "balance" : 50.0,
+    "date" : "2024-04-05"
+  },
+  "CUST2" : {
+    "name" : "saif",
+    "email" : "xncee@gmail.com",
+    "phoneNumber" : "0796076544",
+    "address" : "Amman, Jordan",
+    "balance" : 0.0,
+    "date" : "2024-05-29"
+  },
+  "CUST3" : {
+    "name" : "vdfgvbd",
+    "email" : "fdsfdsf@ff.ss",
+    "phoneNumber" : "43534535",
+    "address" : "gdfg",
+    "balance" : 0.0,
+    "date" : "2024-05-29"
+  },
+  "CUST4" : {
+    "name" : "dsfsdf",
+    "email" : "dsfsdf@gfdg.com",
+    "phoneNumber" : "345345345",
+    "address" : "fgdgdg",
+    "balance" : 0.0,
+    "date" : "2024-05-29"
+  },
+  "CUST5" : {
+    "name" : "Saif",
+    "email" : "saif@gmail.com",
+    "phoneNumber" : "4325435345",
+    "address" : "Amman",
+    "balance" : 0.0,
+    "date" : "2024-05-29"
+  },
+  "CUST6" : {
+    "name" : "saif",
+    "email" : "fsdfsfd@gfds.fdg",
+    "phoneNumber" : "4325345435",
+    "address" : "dsfsdds",
+    "balance" : 0.0,
+    "date" : "2024-05-29"
   }
 }

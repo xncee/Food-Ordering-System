@@ -1,94 +1,72 @@
 {
-  "REV1": [
-    {
-      "customer": "CUST1",
-      "rating": 5,
-      "comment": "Very good"
-    },
-    {
-      "customer": "CUST2",
-      "rating": 4,
-      "comment": "Good"
-    }
-  ],
-  "REV2": [
-    {
-      "customer": "CUST3",
-      "rating": 3,
-      "comment": "Average, could be better."
-    },
-    {
-      "customer": "CUST4",
-      "rating": 5,
-      "comment": "Excellent! Highly recommend."
-    },
-    {
-      "customer": "CUST11",
-      "rating": 4,
-      "comment": "Tasty and fresh."
-    }
-  ],
-  "REV3": [
-    {
-      "customer": "CUST5",
-      "rating": 2,
-      "comment": "Not satisfied with the taste."
-    },
-    {
-      "customer": "CUST6",
-      "rating": 4,
-      "comment": "Good, but a bit pricey."
-    }
-  ],
-  "REV4": [
-    {
-      "customer": "CUST7",
-      "rating": 1,
-      "comment": "Very disappointing."
-    },
-    {
-      "customer": "CUST8",
-      "rating": 3,
-      "comment": "Okay, but not great."
-    },
-    {
-      "customer": "CUST12",
-      "rating": 2,
-      "comment": "Service was slow."
-    },
-    {
-      "customer": "CUST13",
-      "rating": 5,
-      "comment": "Loved the flavors!"
-    }
-  ],
-  "REV5": [
-    {
-      "customer": "CUST9",
-      "rating": 5,
-      "comment": "Delicious and healthy!"
-    },
-    {
-      "customer": "CUST10",
-      "rating": 4,
-      "comment": "Really liked it, will order again."
-    },
-    {
-      "customer": "CUST14",
-      "rating": 5,
-      "comment": "Best meal I've had in a while."
-    },
-    {
-      "customer": "CUST15",
-      "rating": 4,
-      "comment": "Great taste, good value."
-    }
-  ],
-  "REV6": [
-    {
-      "customer": "CUST16",
-      "rating": 3,
-      "comment": "Decent, but nothing special."
-    }
-  ]
+  "REV1" : [ {
+    "customer" : "CUST1",
+    "rating" : 5,
+    "comment" : "Very good"
+  }, {
+    "customer" : "CUST2",
+    "rating" : 4,
+    "comment" : "Good"
+  } ],
+  "REV2" : [ {
+    "customer" : "CUST3",
+    "rating" : 3,
+    "comment" : "Average, could be better."
+  }, {
+    "customer" : "CUST4",
+    "rating" : 5,
+    "comment" : "Excellent! Highly recommend."
+  }, {
+    "customer" : "CUST11",
+    "rating" : 4,
+    "comment" : "Tasty and fresh."
+  } ],
+  "REV3" : [ {
+    "customer" : "CUST5",
+    "rating" : 2,
+    "comment" : "Not satisfied with the taste."
+  }, {
+    "customer" : "CUST6",
+    "rating" : 4,
+    "comment" : "Good, but a bit pricey."
+  } ],
+  "REV4" : [ {
+    "customer" : "CUST7",
+    "rating" : 1,
+    "comment" : "Very disappointing."
+  }, {
+    "customer" : "CUST8",
+    "rating" : 3,
+    "comment" : "Okay, but not great."
+  }, {
+    "customer" : "CUST12",
+    "rating" : 2,
+    "comment" : "Service was slow."
+  }, {
+    "customer" : "CUST13",
+    "rating" : 5,
+    "comment" : "Loved the flavors!"
+  } ],
+  "REV5" : [ {
+    "customer" : "CUST9",
+    "rating" : 5,
+    "comment" : "Delicious and healthy!"
+  }, {
+    "customer" : "CUST10",
+    "rating" : 4,
+    "comment" : "Really liked it, will order again."
+  }, {
+    "customer" : "CUST14",
+    "rating" : 5,
+    "comment" : "Best meal I've had in a while."
+  }, {
+    "customer" : "CUST15",
+    "rating" : 4,
+    "comment" : "Great taste, good value."
+  } ],
+  "REV6" : [ {
+    "customer" : "CUST16",
+    "rating" : 3,
+    "comment" : "Decent, but nothing special."
+  } ]
 }

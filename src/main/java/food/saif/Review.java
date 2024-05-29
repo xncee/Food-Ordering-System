@@ -2,11 +2,11 @@ package food.saif;
 
 public class Review implements Identifiable {
     private String id;
-    private Customer customer;
+    private String customer;
     private int rating; // ★ ★ ★ ★ ★
     private String comment;
 
-    public Review(String id, Customer customer, int rating, String comment) {
+    public Review(String id, String customer, int rating, String comment) {
         this.id = id;
         this.customer = customer;
         setRating(rating);
@@ -22,11 +22,11 @@ public class Review implements Identifiable {
         this.id = id;
     }
 
-    public Customer getCustomer() {
+    public String getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(String customer) {
         this.customer = customer;
     }
 
