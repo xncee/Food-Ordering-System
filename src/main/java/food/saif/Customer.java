@@ -27,6 +27,7 @@ public class Customer extends User {
         if (!checkSufficientBalance(amount)) return false;
 
         balance -= amount;
+        Application.updateCustomers();
         return true;
     }
     public String getEmail() {

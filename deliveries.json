@@ -12,5 +12,19 @@
     "driver" : "DRIVER1",
     "status" : "not delivered",
     "distance" : 5.0
+  },
+  "DELV3" : {
+    "location" : "Zarqa, Jordan, ...",
+    "order" : "ORDER3",
+    "driver" : "DRIVER5",
+    "status" : "not delivered",
+    "distance" : 5.0
+  },
+  "DELV4" : {
+    "location" : "Amman, Jordan",
+    "order" : "ORDER4",
+    "driver" : "DRIVER5",
+    "status" : "not delivered",
+    "distance" : 3.0
   }
 }

@@ -5,7 +5,7 @@
     "restaurant" : "REST1",
     "customer" : "CUST4",
     "total" : 21.950000000000003,
-    "paymentMethod": "cash",
+    "paymentMethod" : "cash",
     "delivery" : "DELV1",
     "address" : "Amman, Jordan",
     "datetime" : "2024-05-29T08:07:56.870094100",
@@ -17,10 +17,34 @@
     "restaurant" : "REST2",
     "customer" : "CUST4",
     "total" : 21.15,
-    "paymentMethod": "cash",
+    "paymentMethod" : "cash",
     "delivery" : "DELV2",
     "address" : "Amman, Jordan",
     "datetime" : "2024-05-29T08:33:25.339025300",
+    "status" : "confirmed"
+  },
+  "ORDER3" : {
+    "items" : [ "ITEM21", "ITEM21", "ITEM21", "ITEM22", "ITEM22" ],
+    "promos" : [ "SAVE20", "SUMMER15" ],
+    "restaurant" : "REST1",
+    "customer" : "CUST4",
+    "total" : 14.65,
+    "paymentMethod" : "balance",
+    "delivery" : "DELV3",
+    "address" : "Zarqa, Jordan, ...",
+    "datetime" : "2024-05-30T19:25:09.503337500",
+    "status" : "confirmed"
+  },
+  "ORDER4" : {
+    "items" : [ "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11", "ITEM11" ],
+    "promos" : [ ],
+    "restaurant" : "REST7",
+    "customer" : "CUST4",
+    "total" : 700.0,
+    "paymentMethod" : "balance",
+    "delivery" : "DELV4",
+    "address" : "Amman, Jordan",
+    "datetime" : "2024-05-30T19:32:06.393698200",
     "status" : "confirmed"
   }
 }

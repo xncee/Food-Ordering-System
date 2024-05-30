@@ -245,7 +245,8 @@ public class CustomerPanel implements ApplicationData, Color {
         System.out.println("2. Confirm Order");
         System.out.println("3. Cancel Order");
         System.out.println("4. Edit Order");
-        int c = getUserInput(new int[] {1, 2, 3});
+        System.out.println("99. <<");
+        int c = getUserInput(new int[] {1, 2, 3, 99});
         switch (c) {
             case 1: {
                 String customerId = customer.getId();
@@ -256,13 +257,14 @@ public class CustomerPanel implements ApplicationData, Color {
                     System.out.println("\tDate: "+order.getDatetime());
                     System.out.println("\tStatus: "+order.getStatus());
                     System.out.println("\tTotal: $"+order.getTotal());
-                    System.out.println("\tPayment method: $"+order.getPaymentMethod());
+                    System.out.println("\tPayment method: "+order.getPaymentMethod());
                 }
                 if (orders.isEmpty())
                     System.out.println(RED+"No orders."+RESET);
                break;
             }
             case 2: {
+                System.out.println("Enter orderId: ");
                 String orderId = input.nextLine();
                 List<Order> orders = Search.findOrder("id", orderId);
                 if (orders.isEmpty()) {
@@ -279,14 +281,19 @@ public class CustomerPanel implements ApplicationData, Color {
                 if (order.getPaymentMethod().equals("cash"))
                     order.confirmOrder();
                 else if (order.getPaymentMethod().equals("balance")) {
-                    if (customer.deductBalance(order.getTotal()))
+                    if (customer.deductBalance(order.getTotal())) {
+                        System.out.println(GREEN + "Order paid." + RESET);
                         order.confirmOrder();
+                    }
                     else
                         System.out.println(RED+"Insufficient balance."+RESET);
                 }
 
-                if (order.isConfirmed())
-                    System.out.println(GREEN+"Order cofirmed."+RESET);
+                if (order.isConfirmed()) {
+                    Application.updateCustomers();
+                    Application.updateOrders();
+                    System.out.println(GREEN + "Order cofirmed." + RESET);
+                }
 
                 break;
             }
@@ -311,6 +318,9 @@ public class CustomerPanel implements ApplicationData, Color {
             case 4: {
                 break;
             }
+            case 99:
+                orderPage();
+                break;
         }
         manageOrdersPage();
     }
