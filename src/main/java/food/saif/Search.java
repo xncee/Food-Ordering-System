@@ -49,7 +49,7 @@ public class Search implements ApplicationData {
                     yield promo.getCode();
             };
 
-            //if (s==null) break;
+            if (s==null) break;
             s = s.toLowerCase();
             searchQuery = searchQuery.toLowerCase();
 
