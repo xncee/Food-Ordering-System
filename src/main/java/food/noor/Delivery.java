@@ -1,6 +1,7 @@
 
 package food.noor;
 
+import food.saif.Application;
 import food.saif.Identifiable;
 
 public class Delivery implements DeliveryServices, Identifiable {
@@ -24,7 +25,11 @@ public class Delivery implements DeliveryServices, Identifiable {
 
     public void updateStatus(String status) {
         this.status = status;
-        System.out.println("Delivery status: " + status);
+    }
+
+    public void cancel() {
+        setStatus("canceled");
+        Application.updateDeliveries();
     }
 
     @Override

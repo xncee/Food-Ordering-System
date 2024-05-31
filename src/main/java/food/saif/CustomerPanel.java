@@ -252,12 +252,7 @@ public class CustomerPanel implements ApplicationData, Color {
                 String customerId = customer.getId();
                 List<Order> orders = Search.findOrder("customerId", customerId);
                 for (Order order: orders) {
-                    System.out.println("ID: "+order.getId());
-                    System.out.println("\tRestaurant: "+order.getRestaurant().getName());
-                    System.out.println("\tDate: "+order.getDatetime());
-                    System.out.println("\tStatus: "+order.getStatus());
-                    System.out.println("\tTotal: $"+order.getTotal());
-                    System.out.println("\tPayment method: "+order.getPaymentMethod());
+                    order.displayOrder();
                 }
                 if (orders.isEmpty())
                     System.out.println(RED+"No orders."+RESET);
@@ -290,14 +285,13 @@ public class CustomerPanel implements ApplicationData, Color {
                 }
 
                 if (order.isConfirmed()) {
-                    Application.updateCustomers();
-                    Application.updateOrders();
                     System.out.println(GREEN + "Order cofirmed." + RESET);
                 }
 
                 break;
             }
             case 3: {
+                System.out.println("Enter orderId: ");
                 String orderId = input.nextLine();
                 List<Order> orders = Search.findOrder("id", orderId);
                 if (orders.isEmpty()) {
@@ -312,10 +306,12 @@ public class CustomerPanel implements ApplicationData, Color {
                     break;
                 }
                 order.cancelOrder();
+                order.getDelivery().cancel();
                 System.out.println(YELLOW+"Order canceled."+RESET);
                 break;
             }
             case 4: {
+                editOrderPage();
                 break;
             }
             case 99:
@@ -503,6 +499,41 @@ public class CustomerPanel implements ApplicationData, Color {
         System.out.println("\tPhone number: "+driver.getPhoneNumber());
         System.out.println("\tApproximate delivery time: "+deliveryTime+" minutes");
 
+    }
+
+    public static void editOrderPage() {
+        waitFor(1);
+        System.out.println("\n# Edit Order Page");
+        System.out.println("1. Add items");
+        System.out.println("2. Remove items");
+        System.out.println("99. <<");
+        int c = getUserInput(new int[] {1, 2, 99});
+
+        switch (c) {
+            case 1: {
+                System.out.println("Enter orderId: ");
+                String orderId = input.nextLine();
+                List<Order> orders = Search.findOrder("id", orderId);
+                if (orders.isEmpty()) {
+                    System.out.println(RED+"Order not found."+RESET);
+                    break;
+                }
+
+                Order order = orders.get(0);
+                //List<Item> items = order.getItems();
+                //System.out.println("Items: ");
+                //System.out.println("\t");
+                order.displayOrder();
+                System.out.println("Enter ");
+
+            }
+            case 2: {
+
+            }
+            case 99:
+                manageOrdersPage();
+                break;
+        }
     }
     public static void walletPage() {
         waitFor(1);

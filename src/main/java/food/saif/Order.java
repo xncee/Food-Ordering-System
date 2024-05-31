@@ -36,6 +36,14 @@ public class Order implements Identifiable, Color {
         this(id, restaurant, items, promos, customer, total, paymentMethod, delivery, datetime, "open");
     }
 
+    public void displayOrder() {
+        System.out.println("ID: "+getId());
+        System.out.println("\tRestaurant: "+restaurant.getName());
+        System.out.println("\tDate: "+datetime);
+        System.out.println("\tStatus: "+status);
+        System.out.println("\tTotal: $"+total);
+        System.out.println("\tPayment method: "+paymentMethod);
+    }
     public void confirmOrder() {
         setStatus("confirmed");
     }
@@ -125,6 +133,7 @@ public class Order implements Identifiable, Color {
 
     public void setStatus(String status) {
         this.status = status;
+        Application.updateOrders();
     }
 
     public double getTotal() {

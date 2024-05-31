@@ -26,5 +26,33 @@
     "driver" : "DRIVER5",
     "status" : "not delivered",
     "distance" : 3.0
+  },
+  "DELV5" : {
+    "location" : "zarqa",
+    "order" : "ORDER5",
+    "driver" : "DRIVER3",
+    "status" : "not delivered",
+    "distance" : 5.0
+  },
+  "DELV6" : {
+    "location" : "Amman, Jordan",
+    "order" : "ORDER6",
+    "driver" : "DRIVER1",
+    "status" : "not delivered",
+    "distance" : 4.0
+  },
+  "DELV7" : {
+    "location" : "Amman, Jordan",
+    "order" : "ORDER7",
+    "driver" : "DRIVER5",
+    "status" : "canceled",
+    "distance" : 2.0
+  },
+  "DELV8" : {
+    "location" : "Amman, Jordan",
+    "order" : "ORDER8",
+    "driver" : "DRIVER5",
+    "status" : "not delivered",
+    "distance" : 6.0
   }
 }
