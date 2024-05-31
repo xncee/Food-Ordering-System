@@ -106,7 +106,7 @@ public class Login implements ApplicationData, Color {
         if (!phoneNumber.startsWith("962") && !phoneNumber.startsWith("+962") && !phoneNumber.startsWith("00962"))
             return false;
         String after962 = phoneNumber.split("962")[1];
-        if (after962.length()<9 || (after962.length()>9 && phoneNumber.split("962")[1].charAt(0)!='0'))
+        if (after962.length()<9 || (after962.length()>9 && after962.charAt(0)!='0'))
             return false;
         for (char c: after962.toCharArray()) {
             try {
@@ -151,7 +151,7 @@ public class Login implements ApplicationData, Color {
         }
         if (!isPhoneNumberValid(phoneNumber)) {
             System.out.println(RED+"Invalid phoneNumber!"+RESET);
-            System.out.println(YELLOW+"*Example: +9627X XXXX XXXX"+RESET);
+            System.out.println(YELLOW+"*Examples: +9627X XXXX XXX, 009627X XXXX XXX, 9627X XXXX XXX"+RESET);
             return false;
         }
         if (!isAddressValid(address)) {
