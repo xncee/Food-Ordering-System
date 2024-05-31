@@ -29,5 +29,19 @@
     "password" : "12345678",
     "email" : "saif@gmail.com",
     "phoneNumber" : "+962796076122"
+  },
+  "ro1c" : {
+    "id" : "CUST5",
+    "username" : "ro1c",
+    "password" : "11223344",
+    "email" : "saif@zu.edu.jo",
+    "phoneNumber" : "0796876566"
+  },
+  "xn" : {
+    "id" : "CUST6",
+    "username" : "xn",
+    "password" : "12345678",
+    "email" : "saif@saif.com",
+    "phoneNumber" : "962796023466"
   }
 }

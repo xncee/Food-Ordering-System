@@ -63,14 +63,15 @@ public class Restaurant extends User {
                     "Description: "+foodItem.getDescription()
             );
             if (foodItem.isHealthy()) {
-                System.out.println("\t"+"Ingredients: "+((HealthyFood) foodItem).getIngredients());
-                System.out.println("\t"+"Calories: "+((HealthyFood) foodItem).getCalories());
-                System.out.print("\tIsVegan: "+((HealthyFood) foodItem).isVegan());
-                System.out.print(", isGlutenFree: "+((HealthyFood) foodItem).isGlutenFree());
-                System.out.print("\n\tisOrganic: "+((HealthyFood) foodItem).isOrganic());
-                System.out.print(", isOrganicCertified: "+((HealthyFood) foodItem).organicCertificateAgent() + "\n");
+                HealthyFood healthyFood = (HealthyFood) foodItem;
+                System.out.println("\t"+"Ingredients: "+healthyFood.getIngredients());
+                System.out.println("\t"+"Calories: "+healthyFood.getCalories());
+                System.out.print("\tIsVegan: "+healthyFood.isVegan());
+                System.out.print(", isGlutenFree: "+healthyFood.isGlutenFree());
+                System.out.print("\n\tisOrganic: "+healthyFood.isOrganic());
+                System.out.print(", isOrganicCertified: "+healthyFood.organicCertificateAgent() + "\n");
             }
-            System.out.println("\t"+"$"+foodItem.getPrice());
+            System.out.println("\t$"+foodItem.getPrice());
         }
     }
 

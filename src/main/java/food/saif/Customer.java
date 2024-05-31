@@ -16,8 +16,19 @@ public class Customer extends User {
         this.date = date;
     }
 
+    public void displayProfile() {
+        System.out.println("ID: "+getId());
+        System.out.println("Name: "+getName());
+        System.out.println("Phone Number: "+getPhoneNumber());
+        System.out.println("Email: "+getEmail());
+        System.out.println("Address: "+address);
+        System.out.println("Balance: $"+balance);
+        System.out.println("Registration Date: "+date);
+    }
+
     public void addBalance(double amount) {
         balance += amount;
+        Application.updateCustomers();
     }
 
     private boolean checkSufficientBalance(double amount) {

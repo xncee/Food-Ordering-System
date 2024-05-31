@@ -24,11 +24,27 @@
     "date" : "2024-05-29"
   },
   "CUST4" : {
-    "name" : "saifffo\\",
+    "name" : "saifffo",
     "email" : "saif@gmail.com",
     "phoneNumber" : "+962796076122",
     "address" : "Amman, Jordan",
     "balance" : 375.1,
     "date" : "2024-05-29"
+  },
+  "CUST5" : {
+    "name" : "Saif Alkhalili",
+    "email" : "saif@zu.edu.jo",
+    "phoneNumber" : "0796876566",
+    "address" : "Amman, Jordan, Alyasmin",
+    "balance" : 75.0,
+    "date" : "2024-05-31"
+  },
+  "CUST6" : {
+    "name" : "saif",
+    "email" : "saif@saif.com",
+    "phoneNumber" : "962796023466",
+    "address" : "Amman",
+    "balance" : 0.0,
+    "date" : "2024-05-31"
   }
 }

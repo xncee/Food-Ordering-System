@@ -16,10 +16,7 @@ public class CustomerPanel implements ApplicationData, Color {
     static Customer customer;
 
     public static void main(String[] args) {
-        //LocalDateTime datetime = LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-
         homePage();
-
     }
     public static void waitFor(int seconds) {
         try {
@@ -96,6 +93,7 @@ public class CustomerPanel implements ApplicationData, Color {
 
                     login = new Login(username, password, name, email, phoneNumber, address);
                     if (login.isLoggedIn) break;
+
                     System.out.println(RED+"Sign up failed. Please try again."+RESET);
                 }
                 break;
@@ -121,13 +119,11 @@ public class CustomerPanel implements ApplicationData, Color {
         System.out.println("2. Change password");
         System.out.println("3. Wallet");
         System.out.println("99) <<");
-
         int c = getUserInput(new int[] {1, 2, 3, 99});
 
         switch (c) {
             case 1: {
-                System.out.println("Username: "+ login.getUsername());
-                System.out.println(customer);
+                customer.displayProfile();
                 break;
             }
             case 2: {
