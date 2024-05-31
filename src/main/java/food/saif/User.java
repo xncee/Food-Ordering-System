@@ -1,7 +1,6 @@
 package food.saif;
 
 public class User implements ApplicationData, Identifiable {
-    // driver extends user
     private String id;
     private String name;
     private String phoneNumber;

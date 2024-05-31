@@ -30,6 +30,7 @@ public class Restaurant extends User {
 
         double sum = 0;
         for (Identifiable r: reviews) {
+            if (r==null) continue;
             Review review = (Review) r;
             sum += review.getRating();
         }
@@ -47,6 +48,7 @@ public class Restaurant extends User {
     public static void displayRestaurants() {
         for (Identifiable r: restaurantsList) {
             Restaurant restaurant = (Restaurant) r;
+            if (restaurant==null) continue;
             System.out.println();
             restaurant.displayRestaurant();
         }
@@ -56,6 +58,7 @@ public class Restaurant extends User {
         int x = 1;
         System.out.println();
         for (Item i: menu.getItems()) {
+            if (i==null) continue;
             Food foodItem = (Food) i;
             System.out.println(
                     (x++) + ". " +

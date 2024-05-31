@@ -44,6 +44,7 @@ public class Order implements Identifiable, Color {
         System.out.println("\tTotal: $"+total);
         System.out.println("\tPayment method: "+paymentMethod);
     }
+
     public void confirmOrder() {
         setStatus("confirmed");
     }
@@ -81,6 +82,7 @@ public class Order implements Identifiable, Color {
     public void calculateTotal() {
         double total = 0;
         for (Item item: items) {
+            if (item==null) continue;
             total += item.getPrice();
         }
         this.total = total;

@@ -342,10 +342,7 @@ public class CustomerPanel implements ApplicationData, Color {
         }
         if (restaurant==null) return;
 
-        System.out.println("\n# "+restaurant.getName());
-        System.out.println("Description: "+restaurant.getDescription());
-        System.out.println("Rating: "+restaurant.getRating() + " ("+restaurant.getOrdersCount()+")");
-        System.out.println("Location: "+restaurant.getLocation());
+        restaurant.displayRestaurant();
         System.out.println();
         System.out.print("Enter to display menu: ");
         input.nextLine();

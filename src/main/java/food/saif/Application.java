@@ -83,10 +83,8 @@ public class Application implements ApplicationData, Color {
     }
 
     public static String getNewId(String prefix, List<Identifiable> list) {
-        // ((Customer) customersList.get(0)).
         String str;
         if (!list.isEmpty()) {
-            //System.out.println(list.get(list.size() - 1).getId());
             str = list.get(list.size() - 1).getId().split(prefix)[1];
         }
         else
@@ -382,8 +380,9 @@ public class Application implements ApplicationData, Color {
 
     public static void updateCustomers() {
         customersJson.removeAll();
-        for (Identifiable r: customersList) {
-            Customer customer = (Customer) r;
+        for (Identifiable c: customersList) {
+            if (c==null) continue;
+            Customer customer = (Customer) c;
             customersJson.put(
                     customer.getId(),
                     new ObjectMapper().createObjectNode()
@@ -401,8 +400,9 @@ public class Application implements ApplicationData, Color {
 
     public static void updateDrivers() {
         driversJson.removeAll();
-        for (Identifiable r: driversList) {
-            Driver driver = (Driver) r;
+        for (Identifiable d: driversList) {
+            if (d==null) continue;
+            Driver driver = (Driver) d;
             driversJson.put(
                     driver.getId(),
                     new ObjectMapper().createObjectNode()
@@ -416,8 +416,9 @@ public class Application implements ApplicationData, Color {
 
     public static void updateDeliveries() {
         deliveriesJson.removeAll();
-        for (Identifiable r: deliveriesList) {
-            Delivery delivery = (Delivery) r;
+        for (Identifiable d: deliveriesList) {
+            if (d==null) continue;
+            Delivery delivery = (Delivery) d;
             deliveriesJson.put(
                     delivery.getId(),
                     new ObjectMapper().createObjectNode()
@@ -434,8 +435,9 @@ public class Application implements ApplicationData, Color {
 
     public static void updateItems() {
         itemsJson.removeAll();
-        for (Identifiable r: itemsList) {
-            Item item = (Item) r;
+        for (Identifiable i: itemsList) {
+            if (i==null) continue;
+            Item item = (Item) i;
             ObjectNode itemNode = new ObjectMapper().createObjectNode()
                     .put("name", item.getName())
                     .put("price", item.getPrice())
@@ -455,8 +457,9 @@ public class Application implements ApplicationData, Color {
 
     public static void updateMenus() {
         menusJson.removeAll();
-        for (Identifiable r : menusList) {
-            Menu menu = (Menu) r;
+        for (Identifiable m : menusList) {
+            if (m==null) continue;
+            Menu menu = (Menu) m;
             String menuId = menu.getId();
             ArrayNode itemsArray = new ObjectMapper().createArrayNode();
             for (Item item : menu.getItems()) {
@@ -478,6 +481,7 @@ public class Application implements ApplicationData, Color {
             String reviewId = rev.get(0).getId();
             ArrayNode reviewsArray = new ObjectMapper().createArrayNode();
             for (Identifiable r: rev) {
+                if (r==null) continue;
                 Review review = (Review) r;
                 ObjectNode reviewNode = new ObjectMapper().createObjectNode();
                 //System.out.println(review);
@@ -497,6 +501,7 @@ public class Application implements ApplicationData, Color {
     public static void updateRestaurants() {
         restaurantsJson.removeAll();
         for (Identifiable r: restaurantsList) {
+            if (r==null) continue;
             Restaurant restaurant = (Restaurant) r;
             restaurantsJson.put(
                     restaurant.getId(),
@@ -516,11 +521,12 @@ public class Application implements ApplicationData, Color {
     public static void updatePromos() {
         promosJson.removeAll();
         for (Promo promo: promosList) {
+            if (promo==null) continue;
             promosJson.put(
                     promo.getCode(),
                     new ObjectMapper().createObjectNode()
-                            .put("discountPercentage", (promo==null?0.0:promo.getDiscountPercentage()))
-                            .put("expirationDate", (promo==null?String.valueOf(LocalDate.now()):String.valueOf(promo.getExpirationDate())))
+                            .put("discountPercentage", promo.getDiscountPercentage())
+                            .put("expirationDate", String.valueOf(promo.getExpirationDate()))
             );
         }
         //System.out.println(promosJson.toPrettyString());
@@ -530,6 +536,7 @@ public class Application implements ApplicationData, Color {
     public static void updateOrders() {
         ordersJson.removeAll();
         for (Identifiable o: ordersList) {
+            if (o==null) continue;
             Order order = (Order) o;
             ArrayNode itemsArray = new ObjectMapper().createArrayNode();
             for (Item item : order.getItems()) {
