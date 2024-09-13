@@ -269,6 +269,12 @@ public class CustomerPanel implements ApplicationData, Color {
                     System.out.println(RED+"This order is already confirmed."+RESET);
                     break;
                 }
+
+                if (order.getCustomer().getId() != customer.getId()) {
+                    System.out.println(RED+"Order not found."+RESET);
+                    break;
+                }
+
                 if (order.getPaymentMethod().equals("cash"))
                     order.confirmOrder();
                 else if (order.getPaymentMethod().equals("balance")) {
