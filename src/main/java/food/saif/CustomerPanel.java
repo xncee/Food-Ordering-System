@@ -296,9 +296,13 @@ public class CustomerPanel implements ApplicationData, Color {
                 }
 
                 Order order = orders.get(0);
+                if (order.getCustomer().getId() != customer.getId()) {
+                    System.out.println(RED+"Order not found."+RESET);
+                    break;
+                }
 
                 if (order.isCanceled()) {
-                    System.out.println(RED+"This order is already canceled."+RESET);
+                    System.out.println(RED+"This order was already canceled."+RESET);
                     break;
                 }
                 order.cancelOrder();

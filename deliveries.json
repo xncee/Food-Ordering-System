@@ -3,7 +3,7 @@
     "location" : "Amman, Jordan",
     "order" : "ORDER1",
     "driver" : "DRIVER1",
-    "status" : "not delivered",
+    "status" : "canceled",
     "distance" : 9.0
   },
   "DELV2" : {
@@ -54,5 +54,19 @@
     "driver" : "DRIVER5",
     "status" : "not delivered",
     "distance" : 6.0
+  },
+  "DELV9" : {
+    "location" : "Amman, Jordan",
+    "order" : "ORDER9",
+    "driver" : "DRIVER4",
+    "status" : "not delivered",
+    "distance" : 5.0
+  },
+  "DELV10" : {
+    "location" : "Amman, Jordan",
+    "order" : "ORDER10",
+    "driver" : "DRIVER5",
+    "status" : "not delivered",
+    "distance" : 3.0
   }
 }
